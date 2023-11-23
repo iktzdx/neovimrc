@@ -7,6 +7,7 @@ local options = {
     conceallevel = 0,                                -- so that `` is visible in markdown files
     cursorline = true,                               -- highlight the current line
     expandtab = true,                                -- convert tabs to spaces
+    exrc = true,                                     -- Automatically execute .nvim.lua, .nvimrc, and .exrc files in the current directory
     fileencoding = "utf-8",                          -- the encoding written to a file
     -- foldcolumn = "1",
     -- foldenable = true,

@@ -19,6 +19,9 @@ local plugins = {
         tag = '0.1.0', -- or branch = '0.1.x',
         dependencies = { 'nvim-lua/plenary.nvim' },
     },
+    -- Use telescope picker for code actions
+    { 'nvim-telescope/telescope-ui-select.nvim' },
+
     -- Colors
     'navarasu/onedark.nvim',
     {
@@ -100,8 +103,8 @@ local plugins = {
     'mfussenegger/nvim-dap',
     'leoluz/nvim-dap-go',
     'rcarriga/nvim-dap-ui',
-    { "folke/neodev.nvim", opts = {} },
-    'nvim-telescope/telescope-dap.nvim',
+    { "folke/neodev.nvim",                      opts = {} },
+    -- 'nvim-telescope/telescope-dap.nvim',
     'theHamsta/nvim-dap-virtual-text',
 
     -- Comment plugin that supports treesitter, dot repeat, left-right/up-down motions, etc.
