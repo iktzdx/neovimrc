@@ -16,7 +16,7 @@ end
 telescope.setup({
     extensions = {
         ["ui-select"] = {
-            themes.get_dropdown({ preview = false })
+            themes.get_dropdown({ previewer = false })
         }
     }
 })
@@ -49,25 +49,25 @@ end)
 local theme = themes.get_cursor(opts.lsp)
 
 -- Lists LSP references for word under the cursor
-vim.keymap.set('n', '<leader>vlr', function()
+vim.keymap.set('n', '<leader>ref', function()
     builtin.lsp_references(theme)
 end)
 
 -- Goto the implementation of the word under the cursor if there's only one,
 -- otherwise show all options in Telescope
-vim.keymap.set('n', '<leader>vli', function()
+vim.keymap.set('n', '<leader>imp', function()
     builtin.lsp_implementations(theme)
 end)
 
 -- Goto the definition of the word under the cursor, if there's only one,
 -- otherwise show all options in Telescope
-vim.keymap.set('n', '<leader>vld', function()
+vim.keymap.set('n', '<leader>def', function()
     builtin.lsp_definitions(theme)
 end)
 
 -- Goto the definition of the type of the word under the cursor, if there's only one,
 -- otherwise show all options in Telescope
-vim.keymap.set('n', '<leader>vlt', function()
+vim.keymap.set('n', '<leader>typ', function()
     builtin.lsp_type_definitions(theme)
 end)
 
@@ -81,6 +81,10 @@ vim.keymap.set('n', '<leader>out', function()
     builtin.lsp_outgoing_calls(theme)
 end)
 
+-- Lists Diagnostics for all open buffers or a specific buffer.
+vim.keymap.set('n', '<leader>fix', function()
+    builtin.diagnostics(themes.get_dropdown({ previewer = false }))
+end)
 
 -- EXTENSIONS
 
