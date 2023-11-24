@@ -26,10 +26,11 @@ require('mason').setup()
 require('mason-lspconfig').setup({
     ensure_installed = {
         -- Replace these with whatever servers you want to install
-        'lua_ls',
+        'bashls',
         'gopls',
+        'intelephense',
+        'lua_ls',
         'tsserver',
-        'bashls'
     }
 })
 
@@ -170,6 +171,17 @@ lspconfig.bashls.setup {
         }
     },
     single_file_support = true,
+}
+
+-- PHP setup
+lspconfig.intelephense.setup {
+    capabilities = capabilities,
+    init_options = {
+        globalStoragePath = os.getenv('HOME') .. '/.local/share/intelephense'
+    },
+    cmd = { "intelephense", "--stdio" },
+    filetypes = { "php" },
+    root_dir = lspconfig.util.root_pattern("composer.json", ".git"),
 }
 
 -- local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
