@@ -70,7 +70,21 @@ lualine.setup({
     sections = {
         lualine_a = { mode },
         lualine_b = { branch, diff, diagnostics },
-        lualine_c = { "filename" },
+        lualine_c = {
+            {
+                "filename",
+                file_status = true,
+                newfile_status = true,
+                path = 1,
+                shorting_target = 40,
+                symbols = {
+                    modified = "[+]",
+                    readonly = "[-]",
+                    unnamed = "[No Name]",
+                    newfile = "[New]",
+                },
+            },
+        },
         lualine_x = { spaces, "encoding", filetype },
         lualine_y = { location },
         lualine_z = { progress },
