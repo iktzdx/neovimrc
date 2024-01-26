@@ -31,6 +31,7 @@ require('mason-lspconfig').setup({
         'intelephense',
         'lua_ls',
         'tsserver',
+        'yamlls',
     }
 })
 
@@ -182,6 +183,30 @@ lspconfig.intelephense.setup {
     cmd = { "intelephense", "--stdio" },
     filetypes = { "php" },
     root_dir = lspconfig.util.root_pattern("composer.json", ".git"),
+}
+
+-- YAML setup
+lspconfig.yamlls.setup {
+    -- other configuration for setup {}
+    cmd = { "yaml-language-server", "--stdio" },
+    filetypes = { "yaml", "yaml.docker-compose" },
+    root_dir = lspconfig.util.find_git_ancestor,
+    single_file_support = true,
+    settings = {
+        yaml = {
+            -- other settings. note this overrides the lspconfig defaults.
+            schemas = {
+                ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+                ["../path/relative/to/file.yml"] = "/.github/workflows/*",
+                ["/path/from/root/of/project"] = "/.github/workflows/*",
+            },
+        },
+        redhat = {
+            telemetry = {
+                enabled = false
+            },
+        }
+    }
 }
 
 -- local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
