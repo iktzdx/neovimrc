@@ -16,7 +16,7 @@ local plugins = {
     -- Fuzzy-finder
     {
         'nvim-telescope/telescope.nvim',
-        tag = '0.1.5', -- or branch = '0.1.x',
+        tag = '0.1.0', -- works well with neovim v0.9.2
         dependencies = { 'nvim-lua/plenary.nvim' },
     },
     -- Use telescope picker for code actions
