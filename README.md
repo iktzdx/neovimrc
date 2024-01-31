@@ -106,3 +106,4 @@ Here are a few of the most commonly used key mappings:
 
 - [Vim Cheat Sheet](https://vim.rtorr.com/)
 - [Mastering the Vim Language](https://youtu.be/wlR5gYd6um0?si=-ZFLkO2ZvqYdIiZI)
+- [A VIM Notebook](https://github.com/omerxx/vim-notebook)
