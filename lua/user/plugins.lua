@@ -26,7 +26,7 @@ local plugins = {
     'navarasu/onedark.nvim',
     {
         "nvim-lualine/lualine.nvim", -- Fast and easy to configure neovim statusline
-        dependencies = { "kyazdani42/nvim-web-devicons", disable = false, opt = true },
+        dependencies = { "kyazdani42/nvim-web-devicons", enabled = true, lazy = true },
     },
     -- Highlight syntax
     {
