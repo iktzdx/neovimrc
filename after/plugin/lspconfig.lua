@@ -36,18 +36,36 @@ require('mason-lspconfig').setup({
 })
 
 -- luasnip setup
-local luasnip = require 'luasnip'
+local luasnip = require('luasnip')
 
 -- nvim-cmp setup
-local cmp = require 'cmp'
+local cmp = require('cmp')
 local cmp_select = { behavior = cmp.ConfirmBehavior.Select }
 local cmp_replace = { behavior = cmp.ConfirmBehavior.Replace }
-cmp.setup {
+
+local has_words_before = function()
+    unpack = unpack or table.unpack
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+-- For more information read https://github.com/hrsh7th/nvim-cmp/blob/main/doc/cmp.txt#L429
+cmp.setup({
+    -- Specify a snippet engine (required)
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body)
         end,
     },
+    completion = {
+        completeopt = "menu,menuone,preview,noselect",
+    },
+
+    window = {
+        -- completion = cmp.config.window.bordered(),
+        -- documentation = cmp.config.window.bordered(),
+    },
+
     mapping = cmp.mapping.preset.insert({
         ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
         ['<C-d>'] = cmp.mapping.scroll_docs(4),  -- Down
@@ -55,16 +73,18 @@ cmp.setup {
         ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
         ['<C-y>'] = cmp.mapping.confirm { cmp_replace, select = true },
         ['<C-Space>'] = cmp.mapping.complete(),
-        ['<Tab>'] = cmp.mapping(function(fallback)
+        ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
+            elseif luasnip.expand_or_locally_jumpable() then
                 luasnip.expand_or_jump()
+            elseif has_words_before() then
+                cmp.complete()
             else
                 fallback()
             end
-        end, { 'i', 's' }),
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
             elseif luasnip.jumpable(-1) then
@@ -72,16 +92,35 @@ cmp.setup {
             else
                 fallback()
             end
-        end, { 'i', 's' }),
+        end, { "i", "s" }),
     }),
+
+    sources = cmp.config.sources({
+        { name = "nvim_lsp", priority = 10 },
+        { name = "luasnip",  priority = 7 },
+        { name = "path",     priority = 5 },
+        { name = "buffer",   priority = 5 },
+        { name = "nvim_lua", priority = 3 },
+    }),
+})
+
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline({ '/', '?' }, {
+    mapping = cmp.mapping.preset.cmdline(),
     sources = {
-        { name = "nvim_lsp" },
-        { name = "luasnip" },
-        { name = "buffer" },
-        { name = "nvim_lua" },
-        { name = "path" },
-    },
-}
+        { name = 'buffer' }
+    }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+        { name = 'path' }
+    }, {
+        { name = 'cmdline' }
+    })
+})
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -105,27 +144,6 @@ lspconfig.lua_ls.setup {
             }
         }
     },
-
-    -- on_init = function(client)
-    --     local path = client.workspace_folders[1].name
-    --     if not vim.loop.fs_stat(path .. '/.luarc.json') and not vim.loop.fs_stat(path .. '/.luarc.jsonc') then
-    --         client.config.settings = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-    --             runtime = {
-    --                 -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-    --                 version = 'LuaJIT'
-    --             },
-    --             -- Make the server aware of Neovim runtime files
-    --             workspace = {
-    --                 library = { vim.env.VIMRUNTIME }
-    --                 -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
-    --                 -- library = vim.api.nvim_get_runtime_file("", true)
-    --             }
-    --         })
-    --         client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
-    --     end
-    --     return true
-    -- end
-
 }
 
 -- Golang LSP setup
@@ -144,6 +162,7 @@ lspconfig.gopls.setup {
                 unusedparams = true,
                 fillstruct = true,
             },
+            staticcheck = true,
         },
     },
 }
@@ -209,7 +228,6 @@ lspconfig.yamlls.setup {
     }
 }
 
--- local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 require('mason-lspconfig').setup_handlers({
     function(server_name)
         lspconfig[server_name].setup({

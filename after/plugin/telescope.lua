@@ -22,7 +22,7 @@ telescope.setup({
 })
 
 -- MAPPINGS
-local opts = require("user.telescope_opts")
+local opts = require('user.telescope_opts')
 
 -- Lists available help tags and opens a new window with the relevant help info on <cr>
 vim.keymap.set('n', '<leader>vh', function()

@@ -1,4 +1,2 @@
-require("user.keymaps")
-require("user.options")
-require("user.autocmd")
-require("user.plugins")
+require("user.core")
+require("user.lazy")
