@@ -1,6 +1,6 @@
 # My Neovim Config
 
-A Neovim config based on ThePrimeagen's video [0 to LSP : Neovim RC From Scratch](https://youtu.be/w7i4amO_zaE?si=xstN83ebvGg8GgCt). It provides a familiar IDE experience and has a very simple structure It provides a familiar IDE experience and has a very simple structure, so you can easily add new plugins.
+A Neovim config based on ThePrimeagen's video [0 to LSP : Neovim RC From Scratch](https://youtu.be/w7i4amO_zaE?si=xstN83ebvGg8GgCt). It provides a familiar IDE experience and has a very simple structure, so you can easily add new plugins.
 
 ![nvim screenshot](nvim.png)
 
