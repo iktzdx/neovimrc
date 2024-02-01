@@ -101,7 +101,8 @@ local plugins = {
     },
     -- Debugging
     'mfussenegger/nvim-dap',
-    'leoluz/nvim-dap-go',
+    -- 'leoluz/nvim-dap-go',
+    'dnlklmts/nvim-dap-go',
     'rcarriga/nvim-dap-ui',
     { "folke/neodev.nvim",                      opts = {} },
     -- 'nvim-telescope/telescope-dap.nvim',
