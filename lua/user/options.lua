@@ -55,6 +55,19 @@ vim.opt.whichwrap:append("<,>,[,],h,l")
 -- https://github.com/kevinhwang91/nvim-ufo/issues/4
 -- vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
+-- [[
+-- netwr customization
+local netwr_options = {
+    netrw_banner = 0,
+    netrw_winsize = 75,
+    netrw_liststyle = 0,
+}
+
+for k, v in pairs(netwr_options) do
+    vim.g[k] = v
+end
+-- ]]
+
 for k, v in pairs(options) do
     vim.opt[k] = v
 end
