@@ -10,7 +10,7 @@ return {
     {
         "numToStr/Comment.nvim",
         lazy = false,
-        config = comment_config
+        config = comment_config,
     },
     {
         "folke/todo-comments.nvim",
@@ -18,4 +18,3 @@ return {
         config = todo_config,
     },
 }
-

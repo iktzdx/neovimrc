@@ -26,13 +26,13 @@ local function cmp_options()
         },
         view = {
             entries = {
-                name = 'custom',
-                selection_order = 'near_cursor'
-            }
+                name = "custom",
+                selection_order = "near_cursor",
+            },
         },
         mapping = cmp.mapping.preset.insert({
             ["<C-u>"] = cmp.mapping.scroll_docs(-4), -- Up
-            ["<C-d>"] = cmp.mapping.scroll_docs(4),  -- Down
+            ["<C-d>"] = cmp.mapping.scroll_docs(4), -- Down
             ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
             ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
             ["<C-y>"] = cmp.mapping.confirm({ cmp_replace, select = true }),
@@ -60,9 +60,9 @@ local function cmp_options()
         }),
         sources = cmp.config.sources({
             { name = "nvim_lsp", priority = 10 },
-            { name = "luasnip",  priority = 7 },
-            { name = "path",     priority = 5 },
-            { name = "buffer",   priority = 5 },
+            { name = "luasnip", priority = 7 },
+            { name = "path", priority = 5 },
+            { name = "buffer", priority = 5 },
             { name = "nvim_lua", priority = 3 },
         }),
     }

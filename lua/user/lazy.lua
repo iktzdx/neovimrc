@@ -12,27 +12,24 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup(
-    {
-        { import = "user.plugins.ui" },
-        { import = "user.plugins.nav" },
-        { import = "user.plugins.treesitter" },
-        { import = "user.plugins.cmp" },
-        { import = "user.plugins.lsp" },
-        { import = "user.plugins.dap" },
-        { import = "user.plugins.golang" },
-        { import = "user.plugins.utils" },
+require("lazy").setup({
+    { import = "user.plugins.ui" },
+    { import = "user.plugins.nav" },
+    { import = "user.plugins.treesitter" },
+    { import = "user.plugins.cmp" },
+    { import = "user.plugins.lsp" },
+    { import = "user.plugins.dap" },
+    { import = "user.plugins.golang" },
+    { import = "user.plugins.utils" },
+}, {
+    install = {
+        colorscheme = { "onedark" },
     },
-    {
-        install = {
-            colorscheme = { "onedark" },
-        },
-        checker = {
-            enabled = false,
-            notify = true,
-        },
-        change_detection = {
-            notify = false,
-        },
-    }
-)
+    checker = {
+        enabled = false,
+        notify = true,
+    },
+    change_detection = {
+        notify = false,
+    },
+})

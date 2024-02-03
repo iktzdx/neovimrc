@@ -27,7 +27,7 @@ local function lspconfig_config()
     })
     -- ]]
 
-    local lspconfig = require('lspconfig')
+    local lspconfig = require("lspconfig")
 
     -- Add additional capabilities supported by nvim-cmp
     local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -40,17 +40,17 @@ local function lspconfig_config()
         settings = {
             Lua = {
                 runtime = {
-                    version = 'LuaJIT'
+                    version = "LuaJIT",
                 },
                 diagnostics = {
                     globals = { "vim" },
                 },
                 workspace = {
                     library = {
-                        [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-                        [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
-                        [vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types"] = true,
-                        [vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy"] = true,
+                        [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                        [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+                        [vim.fn.stdpath("data") .. "/lazy/ui/nvchad_types"] = true,
+                        [vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy"] = true,
                     },
                     maxPreload = 100000,
                     preloadFileSize = 10000,
@@ -82,7 +82,6 @@ local function lspconfig_config()
     })
     -- ]]
 
-
     -- [[
     -- PHP LSP
     lspconfig.intelephense.setup({
@@ -102,10 +101,13 @@ local function lspconfig_config()
             yaml = {
                 schemas = {
                     ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.0/all.json"] = "k8s/**",
-                    ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = { "ci/*.yml", ".gitlab-ci.yml" },
+                    ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = {
+                        "ci/*.yml",
+                        ".gitlab-ci.yml",
+                    },
                 },
                 customTags = {
-                    "!reference sequence"
+                    "!reference sequence",
                 },
             },
             redhat = {

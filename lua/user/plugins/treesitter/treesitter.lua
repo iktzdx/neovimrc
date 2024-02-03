@@ -29,7 +29,7 @@ local function ts_options()
             additional_vim_regex_highlighting = false,
         },
         indent = {
-            enablee = true
+            enablee = true,
         },
         -- add incremental selection
         incremental_selection = {

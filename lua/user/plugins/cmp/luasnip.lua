@@ -1,7 +1,7 @@
 local function luasnip_options()
     local options = {
         history = true,
-        update_events = "TextChanged, TextChangedI"
+        update_events = "TextChanged, TextChangedI",
     }
     return options
 end
@@ -17,26 +17,25 @@ local function luasnip_config(_, opts)
     -- vscode format
     vscode_loader.lazy_load()
     vscode_loader.lazy_load({
-        paths = vim.g.vscode_snippets_path or ""
+        paths = vim.g.vscode_snippets_path or "",
     })
 
     -- snipmate format
     snipmate_loader.load()
     snipmate_loader.lazy_load({
-        paths = vim.g.snipmate_snippets_path or ""
+        paths = vim.g.snipmate_snippets_path or "",
     })
 
     -- lua format
     lua_loader.load()
     lua_loader.lazy_load({
-        paths = vim.g.lua_snippets_path or ""
+        paths = vim.g.lua_snippets_path or "",
     })
 
     vim.api.nvim_create_autocmd("InsertLeave", {
         callback = function()
             local current_buf = vim.api.nvim_get_current_buf()
-            if luasnip.session.current_nodes[current_buf] and
-                not luasnip.session.jump_active then
+            if luasnip.session.current_nodes[current_buf] and not luasnip.session.jump_active then
                 luasnip.unlink_current()
             end
         end,

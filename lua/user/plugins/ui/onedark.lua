@@ -7,7 +7,7 @@ local function onedark_options()
         -- Default 'dark'
         style = "warm",
         toggle_style_key = "<leader>ts",
-        toggle_style_list = { 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light' },
+        toggle_style_list = { "dark", "darker", "cool", "deep", "warm", "warmer", "light" },
         transparent = true,
         -- TODO: highlight syntax tokens with different colors
         -- in order to distinguish, for example, local variables from function arguments.

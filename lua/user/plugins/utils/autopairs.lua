@@ -3,8 +3,8 @@ local function autopairs_options()
         fast_warp = {},
         disable_filetype = {
             "TelescopePrompt",
-            "vim"
-        }
+            "vim",
+        },
     }
     return options
 end
@@ -21,7 +21,6 @@ return {
         lazy = true,
         event = "InsertEnter",
         opts = autopairs_options,
-        config = autopairs_config
-    }
+        config = autopairs_config,
+    },
 }
-

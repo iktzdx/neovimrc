@@ -25,7 +25,10 @@ local function dap_config()
         "DapLogPoint",
         { text = "", texthl = "DapLogPoint", linehl = "DapLogPoint", numhl = "DapLogPoint" }
     )
-    vim.fn.sign_define("DapStopped", { text = "", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" })
+    vim.fn.sign_define(
+        "DapStopped",
+        { text = "", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" }
+    )
 
     -- keymaps
     vim.keymap.set("n", "<leader>bb", function()
@@ -92,7 +95,7 @@ return {
         {
             "rcarriga/nvim-dap-ui",
             config = dapui_config,
-        }
+        },
     },
     config = dap_config,
 }

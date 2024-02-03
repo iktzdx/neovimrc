@@ -5,11 +5,11 @@ local function tsobj_options()
                 enable = true,
                 swap_next = {
                     ["<leader>na"] = "@parameter.inner", -- swap parameters/arguments with next
-                    ["<leader>nm"] = "@function.outer",  -- swap function/method with next
+                    ["<leader>nm"] = "@function.outer", -- swap function/method with next
                 },
                 swap_previous = {
                     ["<leader>pa"] = "@parameter.inner", -- swap parameters/arguments with previous
-                    ["<leader>pm"] = "@function.outer",  -- swap function/method with previous
+                    ["<leader>pm"] = "@function.outer", -- swap function/method with previous
                 },
             },
             move = {
@@ -52,7 +52,10 @@ local function tsobj_options()
                     ["]L"] = { query = "@loop.outer", desc = "move cursor to the end of the next loop" },
                 },
                 goto_previous_start = {
-                    ["[f"] = { query = "@call.outer", desc = "move cursor to the beginning of the previous function call" },
+                    ["[f"] = {
+                        query = "@call.outer",
+                        desc = "move cursor to the beginning of the previous function call",
+                    },
                     ["[m"] = {
                         query = "@function.outer",
                         desc = "move cursor to the beginning of the previous method definition",
@@ -119,7 +122,7 @@ local function tsobj_options()
                 -- mapping query_strings to modes.
                 selection_modes = {
                     ["@parameter.outer"] = "v", -- charwise
-                    ["@function.outer"] = "V",  -- linewise
+                    ["@function.outer"] = "V", -- linewise
                     ["@class.outer"] = "<c-v>", -- blockwise
                 },
                 -- If you set this to `true` (default is `false`) then any textobject is
