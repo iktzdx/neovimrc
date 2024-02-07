@@ -103,7 +103,7 @@ return {
         "hrsh7th/cmp-cmdline",
         "hrsh7th/cmp-nvim-lua",
         "saadparwaiz1/cmp_luasnip",
-        "hrsh7th/cmp-nvim-lsp", -- TODO: check if it works here
+        "hrsh7th/cmp-nvim-lsp",
     },
     opts = cmp_options,
     config = cmp_config,
