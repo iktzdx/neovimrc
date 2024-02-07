@@ -3,6 +3,7 @@ local function ts_options()
         ensure_installed = {
             "bash",
             "dockerfile",
+            "gitcommit",
             "go",
             "gomod",
             "gosum",
@@ -14,6 +15,7 @@ local function ts_options()
             "markdown",
             "markdown_inline",
             "php",
+            "terraform",
             "tsx",
             "typescript",
             "vim",
@@ -29,7 +31,7 @@ local function ts_options()
             additional_vim_regex_highlighting = false,
         },
         indent = {
-            enablee = true,
+            enable = true,
         },
         -- add incremental selection
         incremental_selection = {
@@ -53,6 +55,8 @@ end
 
 return {
     "nvim-treesitter/nvim-treesitter",
+    event = { "BufReadPost", "BufNewFile" },
+    cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
     opts = ts_options,
     config = ts_config,

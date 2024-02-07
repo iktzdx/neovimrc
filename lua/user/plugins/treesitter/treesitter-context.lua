@@ -23,6 +23,7 @@ end
 
 return {
     "nvim-treesitter/nvim-treesitter-context",
+    event = { "BufReadPost", "BufNewFile" },
     opts = ts_context_options,
     config = ts_context_config,
 }
