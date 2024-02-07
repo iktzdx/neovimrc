@@ -128,9 +128,16 @@ local function mason_lsp_handlers()
 end
 
 local function mason_lsp_config(_, opts)
+    require("fidget").setup({
+        notification = {
+            window = {
+                winblend = 0,
+            },
+        },
+    })
+
     require("mason").setup()
     require("mason-lspconfig").setup(opts)
-
     require("mason-lspconfig").setup_handlers(mason_lsp_handlers())
 
     -- Use LspAttach autocommand to only map the following keys
@@ -174,6 +181,7 @@ return {
     dependencies = {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
+        "j-hui/fidget.nvim",
     },
     opts = mason_lsp_options,
     config = mason_lsp_config,
