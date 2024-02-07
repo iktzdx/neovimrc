@@ -14,18 +14,38 @@ local function telescope_options()
                 "--column",
                 "--smart-case",
             },
+            prompt_prefix = "   ",
             selection_caret = "  ",
             entry_prefix = "  ",
             initial_mode = "insert",
             selection_strategy = "reset",
             sorting_strategy = "ascending",
+            layout_strategy = "horizontal",
+            layout_config = {
+                horizontal = {
+                    prompt_position = "top",
+                    preview_width = 0.7,
+                    results_width = 0.6,
+                },
+                vertical = {
+                    prompt_position = "top",
+                    mirror = false,
+                },
+                width = 0.87,
+                height = 0.80,
+                preview_cutoff = 120,
+            },
             file_sorter = require("telescope.sorters").get_fuzzy_file,
             generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
+            dynamic_preview_title = true,
             path_display = {
+                -- see :h telescope.defaults.path_display
+                -- shorten = { len = 1, exclude = { -1, -2 } },
                 "truncate",
             },
             winblend = 0,
             border = {},
+            borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
             color_devicons = true,
             set_env = {
                 ["COLORTERM"] = "truecolor",
@@ -33,16 +53,20 @@ local function telescope_options()
             file_previewer = require("telescope.previewers").vim_buffer_cat.new,
             grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
             qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
+            buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
+            mappings = {
+                n = { ["q"] = require("telescope.actions").close },
+            },
         },
         extensions = {
             ["ui-select"] = {
                 themes.get_dropdown({ previewer = false }),
             },
             ["fzf"] = {
-                fuzzy = true, -- false will only do exact matching
+                fuzzy = true,                   -- false will only do exact matching
                 override_generic_sorter = true, -- override the generic sorter
-                override_file_sorter = true, -- override the file sorter
-                case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+                override_file_sorter = true,    -- override the file sorter
+                case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
             },
         },
     }
@@ -56,73 +80,127 @@ local function telescope_config(_, opts)
     telescope.setup(opts)
 
     local builtin = require("telescope.builtin")
-    local themes = require("telescope.themes")
-    local custom_opts = require("user.config.telescope_opts")
+
+    local file_pickers_defaults = {
+        file_ignore_patterns = { ".git/" },
+        follow = true,
+        hidden = true,
+        no_ignore = true,
+        results_title = false,
+        previewer = false,
+        layout_strategy = "vertical",
+        layout_config = {
+            mirror = true,
+            anchor = "N",
+            prompt_position = "top",
+            height = 0.50,
+            width = 0.50,
+        },
+    }
+
 
     -- [[
     -- MAPPINGS
-    local keymap = vim.keymap
 
     -- Lists available help tags and opens a new window with the relevant help info on <cr>
-    keymap.set("n", "<leader>vh", function()
-        builtin.help_tags(custom_opts.help_tags)
-    end)
+    vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
+
+    -- [[
+    -- Search for files and open buffers
 
     -- Lists files in your current working directory, respects .gitignore
-    keymap.set("n", "<leader>pf", function()
-        builtin.find_files(custom_opts.find_files)
+    vim.keymap.set("n", "<leader>pf", function()
+        builtin.find_files(file_pickers_defaults)
+    end)
+
+    -- Fuzzy search through the output of git ls-files command, respects .gitignore
+    vim.keymap.set('n', '<C-p>', function()
+        builtin.git_files(file_pickers_defaults)
     end)
 
     -- Lists open buffers in current neovim instance
-    keymap.set("n", "<leader>pb", function()
-        builtin.buffers(custom_opts.buffers)
+    vim.keymap.set("n", "<leader>pb", function()
+        builtin.buffers(file_pickers_defaults)
     end)
+    -- ]]
+
+    -- [[
+    -- Search for an entry that matches patterns
 
     -- Search for a string in your current working directory and get results live as you type,
     -- respects .gitignore. (Requires ripgrep)
-    keymap.set("n", "<leader>lg", function()
-        builtin.live_grep(custom_opts.live_grep)
+    vim.keymap.set("n", "<leader>lg", builtin.live_grep, {})
+
+    -- Searches for the string under your cursor or selection in your current working directory
+    vim.keymap.set('n', '<leader>pws', function()
+        builtin.grep_string({ search = vim.fn.expand("<cword>") })
     end)
 
+    vim.keymap.set('n', '<leader>pWs', function()
+        builtin.grep_string({ search = vim.fn.expand("<cWORD>") })
+    end)
+    -- ]]
+
+    -- [[
     -- LSP related
-    local theme = themes.get_cursor(custom_opts.lsp)
+
+    -- [[
+    -- Set custom theme options
+    local themes = require("telescope.themes")
+    -- local dropdown_theme = themes.get_dropdown({ previewer = false })
+    local cursor_theme = themes.get_cursor({
+        path_display = { "tail" },
+        layout_config = {
+            width = 0.70,
+            height = 0.50,
+        },
+    })
+
+    local bottom_pane_theme = themes.get_ivy({
+        path_display = { "tail" },
+        layout_config = {
+            height = 0.5,
+        },
+    })
+    -- ]]
 
     -- Lists LSP references for word under the cursor
-    keymap.set("n", "<leader>ref", function()
-        builtin.lsp_references(theme)
+    vim.keymap.set("n", "<leader>ref", function()
+        builtin.lsp_references(cursor_theme)
     end)
 
     -- Goto the implementation of the word under the cursor if there's only one,
     -- otherwise show all options in Telescope
-    keymap.set("n", "<leader>imp", function()
-        builtin.lsp_implementations(theme)
+    vim.keymap.set("n", "<leader>imp", function()
+        builtin.lsp_implementations(cursor_theme)
     end)
 
     -- Goto the definition of the word under the cursor, if there's only one,
     -- otherwise show all options in Telescope
-    keymap.set("n", "<leader>def", function()
-        builtin.lsp_definitions(theme)
+    vim.keymap.set("n", "<leader>def", function()
+        builtin.lsp_definitions(cursor_theme)
     end)
 
     -- Goto the definition of the type of the word under the cursor, if there's only one,
     -- otherwise show all options in Telescope
-    keymap.set("n", "<leader>typ", function()
-        builtin.lsp_type_definitions(theme)
+    vim.keymap.set("n", "<leader>typ", function()
+        builtin.lsp_type_definitions(cursor_theme)
     end)
 
     -- Lists LSP incoming calls for word under the cursor
-    keymap.set("n", "<leader>inc", function()
-        builtin.lsp_incoming_calls(theme)
+    vim.keymap.set("n", "<leader>inc", function()
+        builtin.lsp_incoming_calls(cursor_theme)
     end)
 
     -- Lists LSP outgoing calls for word under the cursor
-    keymap.set("n", "<leader>out", function()
-        builtin.lsp_outgoing_calls(theme)
+    vim.keymap.set("n", "<leader>out", function()
+        builtin.lsp_outgoing_calls(cursor_theme)
     end)
 
     -- Lists Diagnostics for all open buffers or a specific buffer.
-    keymap.set("n", "<leader>fix", function()
-        builtin.diagnostics(themes.get_dropdown({ previewer = false }))
+    vim.keymap.set("n", "<leader>fix", function()
+        -- builtin.diagnostics(dropdown_theme)
+        builtin.diagnostics(bottom_pane_theme)
     end)
     -- ]]
 
@@ -131,7 +209,6 @@ local function telescope_config(_, opts)
         telescope.load_extension(k)
     end
 end
--- ]]
 
 return {
     "nvim-telescope/telescope.nvim",
