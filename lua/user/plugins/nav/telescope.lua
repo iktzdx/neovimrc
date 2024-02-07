@@ -63,10 +63,10 @@ local function telescope_options()
                 themes.get_dropdown({ previewer = false }),
             },
             ["fzf"] = {
-                fuzzy = true,                   -- false will only do exact matching
+                fuzzy = true, -- false will only do exact matching
                 override_generic_sorter = true, -- override the generic sorter
-                override_file_sorter = true,    -- override the file sorter
-                case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+                override_file_sorter = true, -- override the file sorter
+                case_mode = "smart_case", -- or "ignore_case" or "respect_case"
             },
         },
     }
@@ -98,12 +98,11 @@ local function telescope_config(_, opts)
         },
     }
 
-
     -- [[
     -- MAPPINGS
 
     -- Lists available help tags and opens a new window with the relevant help info on <cr>
-    vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
+    vim.keymap.set("n", "<leader>vh", builtin.help_tags, {})
 
     -- [[
     -- Search for files and open buffers
@@ -114,7 +113,7 @@ local function telescope_config(_, opts)
     end)
 
     -- Fuzzy search through the output of git ls-files command, respects .gitignore
-    vim.keymap.set('n', '<C-p>', function()
+    vim.keymap.set("n", "<C-p>", function()
         builtin.git_files(file_pickers_defaults)
     end)
 
@@ -132,11 +131,11 @@ local function telescope_config(_, opts)
     vim.keymap.set("n", "<leader>lg", builtin.live_grep, {})
 
     -- Searches for the string under your cursor or selection in your current working directory
-    vim.keymap.set('n', '<leader>pws', function()
+    vim.keymap.set("n", "<leader>pws", function()
         builtin.grep_string({ search = vim.fn.expand("<cword>") })
     end)
 
-    vim.keymap.set('n', '<leader>pWs', function()
+    vim.keymap.set("n", "<leader>pWs", function()
         builtin.grep_string({ search = vim.fn.expand("<cWORD>") })
     end)
     -- ]]

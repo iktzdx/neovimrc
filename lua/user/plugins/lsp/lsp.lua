@@ -39,7 +39,7 @@ local function mason_lsp_handlers()
                             version = "LuaJIT",
                         },
                         diagnostics = {
-                            globals = { "vim" }
+                            globals = { "vim" },
                         },
                         workspace = {
                             library = {
@@ -54,8 +54,8 @@ local function mason_lsp_handlers()
                         telemetry = {
                             enable = false,
                         },
-                    }
-                }
+                    },
+                },
             })
         end,
         -- ]]
@@ -102,8 +102,7 @@ local function mason_lsp_handlers()
                 settings = {
                     yaml = {
                         schemas = {
-                            ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.0/all.json"] =
-                            "k8s/**",
+                            ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.0/all.json"] = "k8s/**",
                             ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = {
                                 "ci/*.yml",
                                 ".gitlab-ci.yml",
@@ -142,24 +141,30 @@ local function mason_lsp_config(_, opts)
 
     -- Use LspAttach autocommand to only map the following keys
     -- after the language server attaches to the current buffer
-    vim.api.nvim_create_autocmd('LspAttach', {
-        group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+    vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(ev)
             -- Enable completion triggered by <c-x><c-o>
-            vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+            vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
             -- Buffer local mappings.
             -- See `:help vim.lsp.*` for documentation on any of the below functions
             local params = { buffer = ev.buf }
-            vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, params)
-            vim.keymap.set('n', 'gd', vim.lsp.buf.definition, params)
-            vim.keymap.set('n', 'K', vim.lsp.buf.hover, params)
-            vim.keymap.set('n', '<C-h>', vim.lsp.buf.signature_help, params)
-            vim.keymap.set('n', '<leader>vrn', vim.lsp.buf.rename, params)
-            vim.keymap.set({ 'n', 'v' }, '<leader>vca', vim.lsp.buf.code_action, params)
-            vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, params)
-            vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, params)
-            vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, params)
+            vim.keymap.set("n", "gD", vim.lsp.buf.declaration, params)
+            vim.keymap.set("n", "gd", vim.lsp.buf.definition, params)
+            vim.keymap.set("n", "K", vim.lsp.buf.hover, params)
+            vim.keymap.set("n", "<C-h>", vim.lsp.buf.signature_help, params)
+            vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, params)
+            vim.keymap.set({ "n", "v" }, "<leader>vca", vim.lsp.buf.code_action, params)
+            vim.keymap.set("n", "<leader>vd", function()
+                vim.diagnostic.open_float()
+            end, params)
+            vim.keymap.set("n", "[d", function()
+                vim.diagnostic.goto_next()
+            end, params)
+            vim.keymap.set("n", "]d", function()
+                vim.diagnostic.goto_prev()
+            end, params)
         end,
     })
 
