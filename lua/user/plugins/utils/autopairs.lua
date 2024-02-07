@@ -5,14 +5,20 @@ local function autopairs_options()
             "TelescopePrompt",
             "vim",
         },
+        enable_check_bracket_line = false,
     }
     return options
 end
 
 local function autopairs_config(_, opts)
-    require("nvim-autopairs").setup(opts)
+    local npairs = require("nvim-autopairs")
+
+    npairs.setup(opts)
+
     local cmp_autopairs = require("nvim-autopairs.completion.cmp")
     require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
+    npairs.disable() -- Not sure if I really need this plugin.
 end
 
 return {
