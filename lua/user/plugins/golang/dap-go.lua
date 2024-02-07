@@ -14,6 +14,6 @@ local function dapgo_config(_, opts)
 end
 
 return {
-    "dnlklmts/nvim-dap-go",
+    "iktzdx/nvim-dap-go",
     config = dapgo_config,
 }
