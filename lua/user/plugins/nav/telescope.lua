@@ -45,7 +45,16 @@ local function telescope_options()
             },
             winblend = 0,
             border = {},
-            borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+            borderchars = {
+                "─",
+                "│",
+                "─",
+                "│",
+                "╭",
+                "╮",
+                "╯",
+                "╰",
+            },
             color_devicons = true,
             set_env = {
                 ["COLORTERM"] = "truecolor",
@@ -63,10 +72,10 @@ local function telescope_options()
                 themes.get_dropdown({ previewer = false }),
             },
             ["fzf"] = {
-                fuzzy = true,                   -- false will only do exact matching
+                fuzzy = true, -- false will only do exact matching
                 override_generic_sorter = true, -- override the generic sorter
-                override_file_sorter = true,    -- override the file sorter
-                case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+                override_file_sorter = true, -- override the file sorter
+                case_mode = "smart_case", -- or "ignore_case" or "respect_case"
             },
         },
     }
@@ -102,10 +111,20 @@ local function telescope_config(_, opts)
     -- MAPPINGS
 
     -- Lists available help tags and opens a new window with the relevant help info on <cr>
-    vim.keymap.set("n", "<leader>vh", builtin.help_tags, { desc = ":Telescope help_tags" })
+    vim.keymap.set(
+        "n",
+        "<leader>vh",
+        builtin.help_tags,
+        { desc = ":Telescope help_tags" }
+    )
 
     -- Lists normal mode keymappings, runs the selected keymap on `<cr>`
-    vim.keymap.set("n", "<leader>vk", builtin.keymaps, { desc = ":Telescope keymaps" })
+    vim.keymap.set(
+        "n",
+        "<leader>vk",
+        builtin.keymaps,
+        { desc = ":Telescope keymaps" }
+    )
 
     -- [[
     -- Search for files and open buffers
@@ -121,10 +140,20 @@ local function telescope_config(_, opts)
     end, { desc = ":Telescope git_files" })
 
     -- Lists git status for current directory
-    vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = ":Telescope git_status" })
+    vim.keymap.set(
+        "n",
+        "<leader>gs",
+        builtin.git_status,
+        { desc = ":Telescope git_status" }
+    )
 
     -- Lists commits for current directory with diff preview
-    vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = ":Telescope git_commits" })
+    vim.keymap.set(
+        "n",
+        "<leader>gc",
+        builtin.git_commits,
+        { desc = ":Telescope git_commits" }
+    )
 
     -- Lists open buffers in current neovim instance
     vim.keymap.set("n", "<leader>pb", function()
@@ -137,7 +166,12 @@ local function telescope_config(_, opts)
 
     -- Search for a string in your current working directory and get results live as you type,
     -- respects .gitignore. (Requires ripgrep)
-    vim.keymap.set("n", "<leader>lg", builtin.live_grep, { desc = ":Telescope live_grep" })
+    vim.keymap.set(
+        "n",
+        "<leader>lg",
+        builtin.live_grep,
+        { desc = ":Telescope live_grep" }
+    )
 
     -- Searches for the string under your cursor or selection in your current working directory
     vim.keymap.set("n", "<leader>pws", function()

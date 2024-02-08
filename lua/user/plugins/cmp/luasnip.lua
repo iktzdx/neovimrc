@@ -35,7 +35,10 @@ local function luasnip_config(_, opts)
     vim.api.nvim_create_autocmd("InsertLeave", {
         callback = function()
             local current_buf = vim.api.nvim_get_current_buf()
-            if luasnip.session.current_nodes[current_buf] and not luasnip.session.jump_active then
+            if
+                luasnip.session.current_nodes[current_buf]
+                and not luasnip.session.jump_active
+            then
                 luasnip.unlink_current()
             end
         end,

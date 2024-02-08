@@ -87,7 +87,8 @@ local function mason_lsp_handlers()
 
                 capabilities = capabilities,
                 init_options = {
-                    globalStoragePath = os.getenv("HOME") .. "/.local/share/intelephense",
+                    globalStoragePath = os.getenv("HOME")
+                        .. "/.local/share/intelephense",
                 },
             })
         end,
@@ -155,7 +156,12 @@ local function mason_lsp_config(_, opts)
             vim.keymap.set("n", "K", vim.lsp.buf.hover, params)
             vim.keymap.set("n", "<C-h>", vim.lsp.buf.signature_help, params)
             vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, params)
-            vim.keymap.set({ "n", "v" }, "<leader>vca", vim.lsp.buf.code_action, params)
+            vim.keymap.set(
+                { "n", "v" },
+                "<leader>vca",
+                vim.lsp.buf.code_action,
+                params
+            )
             vim.keymap.set("n", "<leader>vd", function()
                 vim.diagnostic.open_float()
             end, params)

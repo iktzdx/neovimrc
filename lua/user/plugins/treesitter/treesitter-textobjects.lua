@@ -16,17 +16,26 @@ local function tsobj_options()
                 enable = true,
                 set_jumps = true, -- whether to set jumps in the jumplits
                 goto_next_start = {
-                    ["]f"] = { query = "@call.outer", desc = "move cursor to the beginning of the next function call" },
+                    ["]f"] = {
+                        query = "@call.outer",
+                        desc = "move cursor to the beginning of the next function call",
+                    },
                     ["]m"] = {
                         query = "@function.outer",
                         desc = "move cursor to the beginning of the next method definition",
                     },
-                    ["]c"] = { query = "@class.outer", desc = "move cursor to the beginning of the next class" },
+                    ["]c"] = {
+                        query = "@class.outer",
+                        desc = "move cursor to the beginning of the next class",
+                    },
                     ["]i"] = {
                         query = "@conditional.outer",
                         desc = "move cursor to the beginning of the next conditional",
                     },
-                    ["]l"] = { query = "@loop.outer", desc = "move cursor to the beginning of the next loop" },
+                    ["]l"] = {
+                        query = "@loop.outer",
+                        desc = "move cursor to the beginning of the next loop",
+                    },
                     ["]s"] = {
                         query = "@scope",
                         query_group = "locals",
@@ -39,17 +48,26 @@ local function tsobj_options()
                     },
                 },
                 goto_next_end = {
-                    ["]F"] = { query = "@call.outer", desc = "move cursor to the end of the next function call" },
+                    ["]F"] = {
+                        query = "@call.outer",
+                        desc = "move cursor to the end of the next function call",
+                    },
                     ["]M"] = {
                         query = "@function.outer",
                         desc = "move cursor to the end of the next method definition",
                     },
-                    ["]C"] = { query = "@class.outer", desc = "move cursor to the end of the next class" },
+                    ["]C"] = {
+                        query = "@class.outer",
+                        desc = "move cursor to the end of the next class",
+                    },
                     ["]I"] = {
                         query = "@conditional.outer",
                         desc = "move cursor to the end of the next conditional",
                     },
-                    ["]L"] = { query = "@loop.outer", desc = "move cursor to the end of the next loop" },
+                    ["]L"] = {
+                        query = "@loop.outer",
+                        desc = "move cursor to the end of the next loop",
+                    },
                 },
                 goto_previous_start = {
                     ["[f"] = {
@@ -60,25 +78,40 @@ local function tsobj_options()
                         query = "@function.outer",
                         desc = "move cursor to the beginning of the previous method definition",
                     },
-                    ["[c"] = { query = "@class.outer", desc = "move cursor to the beginning of the previous class" },
+                    ["[c"] = {
+                        query = "@class.outer",
+                        desc = "move cursor to the beginning of the previous class",
+                    },
                     ["[i"] = {
                         query = "@conditional.outer",
                         desc = "move cursor to the beginning of the previous conditional",
                     },
-                    ["[l"] = { query = "@loop.outer", desc = "move cursor to the beginning of the previous loop" },
+                    ["[l"] = {
+                        query = "@loop.outer",
+                        desc = "move cursor to the beginning of the previous loop",
+                    },
                 },
                 goto_previous_end = {
-                    ["[F"] = { query = "@call.outer", desc = "move cursor to the end of the previous function call" },
+                    ["[F"] = {
+                        query = "@call.outer",
+                        desc = "move cursor to the end of the previous function call",
+                    },
                     ["[M"] = {
                         query = "@function.outer",
                         desc = "move cursor to the end of the previous method definition",
                     },
-                    ["[C"] = { query = "@class.outer", desc = "move cursor to the end of the previous class" },
+                    ["[C"] = {
+                        query = "@class.outer",
+                        desc = "move cursor to the end of the previous class",
+                    },
                     ["[I"] = {
                         query = "@conditional.outer",
                         desc = "move cursor to the end of the previous conditional",
                     },
-                    ["[L"] = { query = "@loop.outer", desc = "move cursor to the end of the previous loop" },
+                    ["[L"] = {
+                        query = "@loop.outer",
+                        desc = "move cursor to the end of the previous loop",
+                    },
                 },
             },
             select = {
@@ -88,30 +121,79 @@ local function tsobj_options()
 
                 keymaps = {
                     -- You can also use captures from other query groups like `locals.scm`
-                    ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+                    ["as"] = {
+                        query = "@scope",
+                        query_group = "locals",
+                        desc = "Select language scope",
+                    },
                     -- Target block
-                    ["ab"] = { query = "@block.outer", desc = "Select outer part of a block" },
-                    ["ib"] = { query = "@block.inner", desc = "Select inner part of a block" },
+                    ["ab"] = {
+                        query = "@block.outer",
+                        desc = "Select outer part of a block",
+                    },
+                    ["ib"] = {
+                        query = "@block.inner",
+                        desc = "Select inner part of a block",
+                    },
                     -- Target class
-                    ["ac"] = { query = "@class.outer", desc = "select outer part of a class" },
-                    ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+                    ["ac"] = {
+                        query = "@class.outer",
+                        desc = "select outer part of a class",
+                    },
+                    ["ic"] = {
+                        query = "@class.inner",
+                        desc = "Select inner part of a class region",
+                    },
                     -- Target function/method definition
-                    ["am"] = { query = "@function.outer", desc = "select outer part of a function definition" },
-                    ["im"] = { query = "@function.inner", desc = "select inner part of a function definition" },
+                    ["am"] = {
+                        query = "@function.outer",
+                        desc = "select outer part of a function definition",
+                    },
+                    ["im"] = {
+                        query = "@function.inner",
+                        desc = "select inner part of a function definition",
+                    },
                     -- Target arguments/parameters
-                    ["aa"] = { query = "@parameter.outer", desc = "select outer part of a parameters/arguments" },
-                    ["ia"] = { query = "@parameter.inner", desc = "select inner part of a parameters/arguments" },
+                    ["aa"] = {
+                        query = "@parameter.outer",
+                        desc = "select outer part of a parameters/arguments",
+                    },
+                    ["ia"] = {
+                        query = "@parameter.inner",
+                        desc = "select inner part of a parameters/arguments",
+                    },
                     -- Target function call
-                    ["af"] = { query = "@call.outer", desc = "select outer part of a function call" },
-                    ["if"] = { query = "@call.inner", desc = "select inner part of a function call" },
+                    ["af"] = {
+                        query = "@call.outer",
+                        desc = "select outer part of a function call",
+                    },
+                    ["if"] = {
+                        query = "@call.inner",
+                        desc = "select inner part of a function call",
+                    },
                     -- Target loop
-                    ["al"] = { query = "@loop.outer", desc = "select outer part of a loop" },
-                    ["il"] = { query = "@loop.inner", desc = "select inner part of a loop" },
+                    ["al"] = {
+                        query = "@loop.outer",
+                        desc = "select outer part of a loop",
+                    },
+                    ["il"] = {
+                        query = "@loop.inner",
+                        desc = "select inner part of a loop",
+                    },
                     -- Target conditional
-                    ["ai"] = { query = "@conditional.outer", desc = "select outer part of a conditional" },
-                    ["ii"] = { query = "@conditional.inner", desc = "select inner part of a conditional" },
+                    ["ai"] = {
+                        query = "@conditional.outer",
+                        desc = "select outer part of a conditional",
+                    },
+                    ["ii"] = {
+                        query = "@conditional.inner",
+                        desc = "select inner part of a conditional",
+                    },
                     -- Target statement
-                    ["ae"] = { query = "@conditional.outer", desc = "select outer part of a statement" },
+                    ["ae"] = {
+                        query = "@conditional.outer",
+                        desc = "select outer part of a statement",
+                    },
                 },
                 -- You can choose the select mode (default is charwise 'v')
                 --
@@ -144,14 +226,19 @@ end
 
 local function tsobj_config(_, opts)
     local configs = require("nvim-treesitter.configs")
-    local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+    local ts_repeat_move =
+        require("nvim-treesitter.textobjects.repeatable_move")
 
     configs.setup(opts)
 
     -- Repeat movement with ; and ,
     -- ensure ; goes forward and , goes backward regardless of the last direction
     vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
-    vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
+    vim.keymap.set(
+        { "n", "x", "o" },
+        ",",
+        ts_repeat_move.repeat_last_move_previous
+    )
 
     -- Optionally, make builtin f, F, t, T also repeatable with ; and ,
     vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f)
