@@ -1,6 +1,6 @@
 # My Neovim Config
 
-A Neovim config based on ThePrimeagen's video [0 to LSP : Neovim RC From Scratch](https://youtu.be/w7i4amO_zaE?si=xstN83ebvGg8GgCt). It provides a familiar IDE experience and has a very simple structure, so you can easily add new plugins.
+A Neovim config based on ThePrimeagen's video [0 to LSP : Neovim RC From Scratch](https://youtu.be/w7i4amO_zaE?si=xstN83ebvGg8GgCt) and the following series ([Part 1](https://youtu.be/ZWWxwwUsPNw?si=B8oR7QCCAE6t0vlE), [Part 2](https://youtu.be/c0Xmd4PGino?si=52GovTGAj3cRIgPl), [Part 3](https://youtu.be/MuUrCcvE-Yw?si=222vzBRjywjIhDhj)). It provides a familiar IDE experience and has a very simple structure, so you can easily add new plugins.
 
 ![nvim screenshot](nvim.png)
 
@@ -16,14 +16,14 @@ If you would like to make sure Neovim only updates when you want it to than [ins
 Make sure to remove or backup your current `~/.config/nvim` directory.
 
 ```
-git clone --depth 1 --branch v1.0.0 git@github.com:dnlklmts/nvim.git ~/.config/nvim
+git clone --depth 1 --branch v2.0.0 git@github.com:iktzdx/nvim.git ~/.config/nvim
 ```
 
 ### Plugins
 
 [Lazy](https://github.com/folke/lazy.nvim) is used as a plugin manager. You can manage installed plugins via the `:Lazy` command.
 
-Run `nvim` and wait for the plugins to be installed.
+Run `nvim .` and wait for the plugins to be installed.
 
 **NOTE:** You'll probably notice [treesitter](https://github.com/nvim-treesitter/nvim-treesitter) installing a bunch of parsers the next time you re-open Neovim.
 
@@ -31,53 +31,29 @@ Run `nvim` and wait for the plugins to be installed.
 
 #### Plugin dependencies
 
-Some plugins depend on extra utilities.
+In order for [Telescope](https://github.com/nvim-telescope/telescope.nvim) to work, the following tools are required:
+- [ripgrep](https://github.com/BurntSushi/ripgrep)
+- [fzf](https://github.com/junegunn/fzf)
+- [fd](https://github.com/sharkdp/fd)
 
-- [ripgrep](https://github.com/BurntSushi/ripgrep) is required for [Telescope](https://github.com/nvim-telescope/telescope.nvim) to work.
+For Golang integration:
+- [Go](https://go.dev/) SDK
+- [gopls](https://pkg.go.dev/golang.org/x/tools/gopls#readme-installation) LSP server
+- [delve](https://github.com/go-delve/delve) debugger
 
-#### Active plugins
+## Features
 
-All active plugins are listed in the [plugins.lua](lua/user/plugins.lua).
-
-- [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim) extended with:
-    - [williamboman/mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)
-- [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) extended with:
-    - [nvim-treesitter/nvim-treesitter-context](https://github.com/nvim-treesitter/nvim-treesitter-context)
-    - [nvim-treesitter/nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
-- [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
-- [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp) extended with:
-    - [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)
-    - [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
-    - [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
-    - [hrsh7th/cmp-path](https://github.com/hrsh7th/cmp-path)
-    - [saadparwaiz1/cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)
-    - [hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)
-    - [hrsh7th/cmp-nvim-lua](https://github.com/hrsh7th/cmp-nvim-lua)
-- [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
-    - requires [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim) 
-    - extended with [nvim-telescope/telescope-ui-select.nvim](https://github.com/nvim-telescope/telescope-ui-select.nvim)
-- [theprimeagen/harpoon](https://github.com/ThePrimeagen/harpoon)
-- [navarasu/onedark.nvim](https://github.com/navarasu/onedark.nvim)
-- [nvim-lualine/lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)
-    - requires: [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons) and [patched fonts](https://www.nerdfonts.com/)
-- [mbbill/undotree](https://github.com/mbbill/undotree)
-- [olexsmir/gopher.nvim](https://github.com/olexsmir/gopher.nvim)
-- [mfussenegger/nvim-dap](https://github.com/mfussenegger/nvim-dap) extended with:
-    - [leoluz/nvim-dap-go](https://github.com/leoluz/nvim-dap-go)
-    - [rcarriga/nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)
-    - [theHamsta/nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text)
-- [folke/neodev.nvim](https://github.com/folke/neodev.nvim)
-- [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)
-- [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)
-- [numToStr/Comment.nvim](https://github.com/numToStr/Comment.nvim)
-- [folke/todo-comments.nvim](https://github.com/folke/todo-comments.nvim)
-- [kylechui/nvim-surround](https://github.com/kylechui/nvim-surround)
+- LSP support (native LSP + [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) + [mason](https://github.com/williamboman/mason.nvim) + [mason-lspconfig](https://github.com/williamboman/mason-lspconfig.nvim)).
+- Git integration ([gitsigns](https://github.com/lewis6991/gitsigns.nvim) + [vim-fugitive](https://github.com/tpope/vim-fugitive)).
+- Auto-completion ([nvim-cmp](https://github.com/hrsh7th/nvim-cmp)) and code snippets ([luasnip](https://github.com/L3MON4D3/LuaSnip)).
+- Fuzzy find, live grep ([telescope](https://github.com/nvim-telescope/telescope.nvim)) and jump between files ([harpoon](https://github.com/ThePrimeagen/harpoon)).
+- Debugging ([nvim-dap](https://github.com/mfussenegger/nvim-dap) + [nvim-dap-go](https://github.com/leoluz/nvim-dap-go)).
 
 ## Usage
 
 The main key mappings are listed in the file [keymaps.lua](lua/user/keymaps.lua).
 
-Plugin-specific key mappings can be found in the configuration file for the respective plugin at `after/plugin/plugin_name.lua`.
+Plugin-specific key mappings can be found in the corresponded configuration file (e.g. `lua/user/plugins/category_name/plugin_name.lua`).
 
 Here are a few of the most commonly used key mappings:
 
@@ -92,7 +68,7 @@ Here are a few of the most commonly used key mappings:
 - `<leader>imp` — list all the implementation of the word under the cursor 
 - `<leader>ref` — list all the LSP references of the word under the cursor 
 - `<leader>inc` — list all the LSP incoming calls of the word under the cursor 
-- `<leader>fix` — list diagnostics for all open buffers
+- `<leader>dx` — list diagnostics for all open buffers
 - `]m` — move cursor to the beginning of the next method definition
 - `[m` — move cursor to the beginning of the previous method definition
 - `;` — repeat previous movement
