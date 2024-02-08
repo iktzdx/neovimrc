@@ -16,7 +16,7 @@ If you would like to make sure Neovim only updates when you want it to than [ins
 Make sure to remove or backup your current `~/.config/nvim` directory.
 
 ```
-git clone --depth 1 --branch v2.0.0 git@github.com:iktzdx/nvim.git ~/.config/nvim
+git clone --depth 1 --branch v2.0.1 git@github.com:iktzdx/nvim.git ~/.config/nvim
 ```
 
 ### Plugins
@@ -51,9 +51,9 @@ For Golang integration:
 
 ## Usage
 
-The main key mappings are listed in the file [keymaps.lua](lua/user/keymaps.lua).
+The main key mappings are listed in the file [keymaps.lua](lua/user/config/keymaps.lua).
 
-Plugin-specific key mappings can be found in the corresponded configuration file (e.g. `lua/user/plugins/category_name/plugin_name.lua`).
+Plugin-specific key mappings can be found in the corresponding configuration file (e.g. `lua/user/plugins/category_name/plugin_name.lua`).
 
 Here are a few of the most commonly used key mappings:
 
