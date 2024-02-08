@@ -5,10 +5,10 @@ local function harpoon_config()
     vim.keymap.set("n", "<leader>ha", mark.add_file)
     vim.keymap.set("n", "<leader>hl", ui.toggle_quick_menu)
 
-    vim.keymap.set("n", "<leader>hn", function()
+    vim.keymap.set("n", "]h", function()
         ui.nav_next()
     end)
-    vim.keymap.set("n", "<leader>hp", function()
+    vim.keymap.set("n", "[h", function()
         ui.nav_prev()
     end)
 
@@ -20,9 +20,6 @@ local function harpoon_config()
     end)
     vim.keymap.set("n", "<leader>he", function()
         ui.nav_file(3)
-    end)
-    vim.keymap.set("n", "<leader>hr", function()
-        ui.nav_file(4)
     end)
 end
 
