@@ -18,6 +18,7 @@ require("lazy").setup({
     { import = "user.plugins.treesitter" },
     { import = "user.plugins.cmp" },
     { import = "user.plugins.lsp" },
+    { import = "user.plugins.vcs" },
     { import = "user.plugins.dap" },
     { import = "user.plugins.golang" },
     { import = "user.plugins.utils" },
