@@ -63,10 +63,10 @@ local function telescope_options()
                 themes.get_dropdown({ previewer = false }),
             },
             ["fzf"] = {
-                fuzzy = true, -- false will only do exact matching
+                fuzzy = true,                   -- false will only do exact matching
                 override_generic_sorter = true, -- override the generic sorter
-                override_file_sorter = true, -- override the file sorter
-                case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+                override_file_sorter = true,    -- override the file sorter
+                case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
             },
         },
     }
@@ -216,6 +216,12 @@ local function telescope_config(_, opts)
     for k, _ in pairs(opts.extensions) do
         telescope.load_extension(k)
     end
+
+    -- Change border colors
+    vim.api.nvim_set_hl(0, "TelescopePromptBorder", { bg = "none" })
+    vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { bg = "none" })
+    vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { bg = "none" })
+    vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { bg = "none" })
 end
 
 return {
