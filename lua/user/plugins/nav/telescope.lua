@@ -24,8 +24,8 @@ local function telescope_options()
             layout_config = {
                 horizontal = {
                     prompt_position = "top",
-                    preview_width = 0.7,
-                    results_width = 0.6,
+                    preview_width = 0.55,
+                    results_width = 0.8,
                 },
                 vertical = {
                     prompt_position = "top",
@@ -63,10 +63,10 @@ local function telescope_options()
                 themes.get_dropdown({ previewer = false }),
             },
             ["fzf"] = {
-                fuzzy = true, -- false will only do exact matching
+                fuzzy = true,                   -- false will only do exact matching
                 override_generic_sorter = true, -- override the generic sorter
-                override_file_sorter = true, -- override the file sorter
-                case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+                override_file_sorter = true,    -- override the file sorter
+                case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
             },
         },
     }
@@ -82,7 +82,7 @@ local function telescope_config(_, opts)
     local builtin = require("telescope.builtin")
 
     local file_pickers_defaults = {
-        file_ignore_patterns = { ".git/" },
+        file_ignore_patterns = { "^.git/" },
         follow = true,
         hidden = true,
         no_ignore = true,
@@ -102,7 +102,10 @@ local function telescope_config(_, opts)
     -- MAPPINGS
 
     -- Lists available help tags and opens a new window with the relevant help info on <cr>
-    vim.keymap.set("n", "<leader>vh", builtin.help_tags, {})
+    vim.keymap.set("n", "<leader>vh", builtin.help_tags, { desc = ":Telescope help_tags" })
+
+    -- Lists normal mode keymappings, runs the selected keymap on `<cr>`
+    vim.keymap.set("n", "<leader>vk", builtin.keymaps, { desc = ":Telescope keymaps" })
 
     -- [[
     -- Search for files and open buffers
@@ -110,17 +113,23 @@ local function telescope_config(_, opts)
     -- Lists files in your current working directory, respects .gitignore
     vim.keymap.set("n", "<leader>pf", function()
         builtin.find_files(file_pickers_defaults)
-    end)
+    end, { desc = ":Telescope find_files" })
 
     -- Fuzzy search through the output of git ls-files command, respects .gitignore
     vim.keymap.set("n", "<C-p>", function()
         builtin.git_files(file_pickers_defaults)
-    end)
+    end, { desc = ":Telescope git_files" })
+
+    -- Lists git status for current directory
+    vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = ":Telescope git_status" })
+
+    -- Lists commits for current directory with diff preview
+    vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = ":Telescope git_commits" })
 
     -- Lists open buffers in current neovim instance
     vim.keymap.set("n", "<leader>pb", function()
         builtin.buffers(file_pickers_defaults)
-    end)
+    end, { desc = ":Telescope buffers" })
     -- ]]
 
     -- [[
@@ -128,16 +137,16 @@ local function telescope_config(_, opts)
 
     -- Search for a string in your current working directory and get results live as you type,
     -- respects .gitignore. (Requires ripgrep)
-    vim.keymap.set("n", "<leader>lg", builtin.live_grep, {})
+    vim.keymap.set("n", "<leader>lg", builtin.live_grep, { desc = ":Telescope live_grep" })
 
     -- Searches for the string under your cursor or selection in your current working directory
     vim.keymap.set("n", "<leader>pws", function()
         builtin.grep_string({ search = vim.fn.expand("<cword>") })
-    end)
+    end, { desc = ":Telescope grep_string <cword>" })
 
     vim.keymap.set("n", "<leader>pWs", function()
         builtin.grep_string({ search = vim.fn.expand("<cWORD>") })
-    end)
+    end, { desc = ":Telescope grep_string <cWORD>" })
     -- ]]
 
     -- [[
@@ -166,41 +175,41 @@ local function telescope_config(_, opts)
     -- Lists LSP references for word under the cursor
     vim.keymap.set("n", "<leader>ref", function()
         builtin.lsp_references(cursor_theme)
-    end)
+    end, { desc = ":Telescope lsp_references" })
 
     -- Goto the implementation of the word under the cursor if there's only one,
     -- otherwise show all options in Telescope
     vim.keymap.set("n", "<leader>imp", function()
         builtin.lsp_implementations(cursor_theme)
-    end)
+    end, { desc = ":Telescope lsp_implementations" })
 
     -- Goto the definition of the word under the cursor, if there's only one,
     -- otherwise show all options in Telescope
     vim.keymap.set("n", "<leader>def", function()
         builtin.lsp_definitions(cursor_theme)
-    end)
+    end, { desc = ":Telescope lsp_definitions" })
 
     -- Goto the definition of the type of the word under the cursor, if there's only one,
     -- otherwise show all options in Telescope
     vim.keymap.set("n", "<leader>typ", function()
         builtin.lsp_type_definitions(cursor_theme)
-    end)
+    end, { desc = ":Telescope lsp_type_definitions" })
 
     -- Lists LSP incoming calls for word under the cursor
     vim.keymap.set("n", "<leader>inc", function()
         builtin.lsp_incoming_calls(cursor_theme)
-    end)
+    end, { desc = ":Telescope lsp_incoming_calls" })
 
     -- Lists LSP outgoing calls for word under the cursor
     vim.keymap.set("n", "<leader>out", function()
         builtin.lsp_outgoing_calls(cursor_theme)
-    end)
+    end, { desc = ":Telescope lsp_outgoing_calls" })
 
     -- Lists Diagnostics for all open buffers or a specific buffer.
-    vim.keymap.set("n", "<leader>fix", function()
+    vim.keymap.set("n", "<leader>dx", function()
         -- builtin.diagnostics(dropdown_theme)
         builtin.diagnostics(bottom_pane_theme)
-    end)
+    end, { desc = ":Telescope diagnostics" })
     -- ]]
 
     -- EXTENSIONS
