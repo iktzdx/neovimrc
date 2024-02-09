@@ -1,6 +1,6 @@
 # My Neovim Config
 
-A Neovim config based on ThePrimeagen's video [0 to LSP : Neovim RC From Scratch](https://youtu.be/w7i4amO_zaE?si=xstN83ebvGg8GgCt) and the following series ([Part 1](https://youtu.be/ZWWxwwUsPNw?si=B8oR7QCCAE6t0vlE), [Part 2](https://youtu.be/c0Xmd4PGino?si=52GovTGAj3cRIgPl), [Part 3](https://youtu.be/MuUrCcvE-Yw?si=222vzBRjywjIhDhj)). It provides a familiar IDE experience and has a very simple structure, so you can easily add new plugins.
+A Neovim config based on ThePrimeagen's video [0 to LSP : Neovim RC From Scratch](https://youtu.be/w7i4amO_zaE?si=xstN83ebvGg8GgCt) and the following series ([Part 1](https://youtu.be/ZWWxwwUsPNw?si=B8oR7QCCAE6t0vlE), [Part 2](https://youtu.be/c0Xmd4PGino?si=52GovTGAj3cRIgPl), [Part 3](https://youtu.be/MuUrCcvE-Yw?si=222vzBRjywjIhDhj)). It offers a familiar IDE experience and has a simple structure, making it simple to add new plugins.
 
 ![nvim screenshot](nvim.png)
 
@@ -8,20 +8,20 @@ A Neovim config based on ThePrimeagen's video [0 to LSP : Neovim RC From Scratch
 
 ### Install Neovim v0.9+
 
-You can install Neovim with your package manager, but remember that when you update your packages Neovim may be upgraded to a newer version.
-If you would like to make sure Neovim only updates when you want it to than [install from source](https://github.com/neovim/neovim/wiki/#install-from-source).
+It's possible to install Neovim using your package manager, but be aware that Neovim may be upgraded to a newer version when you update your packages.
+Installing Neovim from the [source code](https://github.com/neovim/neovim/wiki/#install-from-source) is necessary to ensure that it only updates when you want it to.
 
 ### Clone the config
 
 Make sure to remove or backup your current `~/.config/nvim` directory.
 
 ```
-git clone --depth 1 --branch v2.0.1 git@github.com:iktzdx/nvim.git ~/.config/nvim
+git clone --depth 1 --branch v2.0.2 git@github.com:iktzdx/nvim.git ~/.config/nvim
 ```
 
 ### Plugins
 
-[Lazy](https://github.com/folke/lazy.nvim) is used as a plugin manager. You can manage installed plugins via the `:Lazy` command.
+[Lazy](https://github.com/folke/lazy.nvim) is used as a plugin manager. To manage plugins use the `:Lazy` command.
 
 Run `nvim .` and wait for the plugins to be installed.
 
@@ -53,7 +53,7 @@ For Golang integration:
 
 The main key mappings are listed in the file [keymaps.lua](lua/user/config/keymaps.lua).
 
-Plugin-specific key mappings can be found in the corresponding configuration file (e.g. `lua/user/plugins/category_name/plugin_name.lua`).
+The key mappings specific to plugins are placed in their corresponding configuration files (e.g. `lua/user/plugins/category_name/plugin_name.lua`).
 
 Here are a few of the most commonly used key mappings:
 
