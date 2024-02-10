@@ -100,7 +100,6 @@ local function mason_lsp_handlers()
                     command = {
                         "golangci-lint",
                         "run",
-                        "--enable-all",
                         "--out-format",
                         "json",
                         "--issues-exit-code=1",
