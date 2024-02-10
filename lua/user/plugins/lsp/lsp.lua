@@ -3,6 +3,7 @@ local function mason_lsp_options()
         ensure_installed = {
             "bashls",
             "gopls",
+            "golangci_lint_ls",
             "intelephense",
             "lua_ls",
             "tsserver",
@@ -74,6 +75,35 @@ local function mason_lsp_handlers()
                             fillstruct = true,
                         },
                         staticcheck = true,
+                    },
+                },
+            })
+        end,
+        -- ]]
+
+        -- [[
+        -- golangci-lint
+        ["golangci_lint_ls"] = function()
+            lspconfig.golangci_lint_ls.setup({
+                cmd = { "golangci-lint-langserver" },
+                filetypes = { "go", "gomod" },
+                root_dir = lspconfig.util.root_pattern(
+                    ".golangci.yml",
+                    ".golangci.yaml",
+                    ".golangci.toml",
+                    ".golangci.json",
+                    "go.work",
+                    "go.mod",
+                    ".git"
+                ),
+                init_options = {
+                    command = {
+                        "golangci-lint",
+                        "run",
+                        "--enable-all",
+                        "--out-format",
+                        "json",
+                        "--issues-exit-code=1",
                     },
                 },
             })
