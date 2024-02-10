@@ -16,12 +16,12 @@ Installing Neovim from the [source code](https://github.com/neovim/neovim/wiki/#
 Make sure to remove or backup your current `~/.config/nvim` directory.
 
 ```
-git clone --depth 1 --branch v2.0.2 git@github.com:iktzdx/nvim.git ~/.config/nvim
+git clone --depth 1 --branch v2.1.0 git@github.com:iktzdx/nvim.git ~/.config/nvim
 ```
 
 ### Plugins
 
-[Lazy](https://github.com/folke/lazy.nvim) is used as a plugin manager. To manage plugins use the `:Lazy` command.
+[Lazy](https://github.com/folke/lazy.nvim) is used as a plugin manager. Run the `:Lazy` command to access the main menu.
 
 Run `nvim .` and wait for the plugins to be installed.
 
