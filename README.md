@@ -16,7 +16,7 @@ Installing Neovim from the [source code](https://github.com/neovim/neovim/wiki/#
 Make sure to remove or backup your current `~/.config/nvim` directory.
 
 ```
-git clone --depth 1 --branch v2.1.0 git@github.com:iktzdx/nvim.git ~/.config/nvim
+git clone --depth 1 --branch v2.2.0 git@github.com:iktzdx/nvim.git ~/.config/nvim
 ```
 
 ### Plugins
@@ -37,9 +37,10 @@ In order for [Telescope](https://github.com/nvim-telescope/telescope.nvim) to wo
 - [fd](https://github.com/sharkdp/fd)
 
 For Golang integration:
-- [Go](https://go.dev/) SDK
-- [gopls](https://pkg.go.dev/golang.org/x/tools/gopls#readme-installation) LSP server
-- [delve](https://github.com/go-delve/delve) debugger
+- SDK: [Go](https://go.dev/)
+- Language server: [gopls](https://pkg.go.dev/golang.org/x/tools/gopls#readme-installation)
+- Debugger: [delve](https://github.com/go-delve/delve)
+- Linters runner: [golangci-lint](https://github.com/golangci/golangci-lint)
 
 ## Features
 
