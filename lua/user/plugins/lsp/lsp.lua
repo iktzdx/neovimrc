@@ -173,7 +173,7 @@ local function mason_lsp_config(_, opts)
     vim.api.nvim_create_augroup("UserLspConfig", {})
 
     -- autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
-    vim.api.nvim_create_autocmd({ "CursorHold", "LspAttach" }, {
+    vim.api.nvim_create_autocmd({ "CursorHold"}, {
         group = "UserLspConfig",
         callback = function()
             vim.o.updatetime = 2000
@@ -181,7 +181,7 @@ local function mason_lsp_config(_, opts)
         end
     })
     -- autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
-    vim.api.nvim_create_autocmd({ "CursorHoldI", "LspAttach" }, {
+    vim.api.nvim_create_autocmd({ "CursorHoldI"}, {
         group = "UserLspConfig",
         callback = function()
             vim.o.updatetime = 2000
@@ -189,7 +189,7 @@ local function mason_lsp_config(_, opts)
         end
     })
     -- autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-    vim.api.nvim_create_autocmd({ "CursorMoved", "LspAttach" }, {
+    vim.api.nvim_create_autocmd({ "CursorMoved"}, {
         group = "UserLspConfig",
         callback = function()
             vim.lsp.buf.clear_references()
