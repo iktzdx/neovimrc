@@ -132,7 +132,8 @@ local function mason_lsp_handlers()
                 settings = {
                     yaml = {
                         schemas = {
-                            ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.0/all.json"] = "k8s/**",
+                            ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.0/all.json"] =
+                            "k8s/**",
                             ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = {
                                 "ci/*.yml",
                                 ".gitlab-ci.yml",
@@ -169,10 +170,36 @@ local function mason_lsp_config(_, opts)
     require("mason-lspconfig").setup(opts)
     require("mason-lspconfig").setup_handlers(mason_lsp_handlers())
 
+    vim.api.nvim_create_augroup("UserLspConfig", {})
+
+    -- autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
+    vim.api.nvim_create_autocmd({ "CursorHold", "LspAttach" }, {
+        group = "UserLspConfig",
+        callback = function()
+            vim.o.updatetime = 2000
+            vim.lsp.buf.document_highlight()
+        end
+    })
+    -- autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
+    vim.api.nvim_create_autocmd({ "CursorHoldI", "LspAttach" }, {
+        group = "UserLspConfig",
+        callback = function()
+            vim.o.updatetime = 2000
+            vim.lsp.buf.document_highlight()
+        end
+    })
+    -- autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+    vim.api.nvim_create_autocmd({ "CursorMoved", "LspAttach" }, {
+        group = "UserLspConfig",
+        callback = function()
+            vim.lsp.buf.clear_references()
+        end
+    })
+
     -- Use LspAttach autocommand to only map the following keys
     -- after the language server attaches to the current buffer
     vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+        group = "UserLspConfig",
         callback = function(ev)
             -- Enable completion triggered by <c-x><c-o>
             vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
