@@ -16,7 +16,7 @@ Installing Neovim from the [source code](https://github.com/neovim/neovim/wiki/#
 Make sure to remove or backup your current `~/.config/nvim` directory.
 
 ```
-git clone --depth 1 --branch v2.2.1 git@github.com:iktzdx/nvim.git ~/.config/nvim
+git clone --depth 1 --branch v2.3.0 git@github.com:iktzdx/nvim.git ~/.config/nvim
 ```
 
 ### Plugins
@@ -47,7 +47,8 @@ For Golang integration:
 - LSP support (native LSP + [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) + [mason](https://github.com/williamboman/mason.nvim) + [mason-lspconfig](https://github.com/williamboman/mason-lspconfig.nvim)).
 - Git integration ([gitsigns](https://github.com/lewis6991/gitsigns.nvim) + [vim-fugitive](https://github.com/tpope/vim-fugitive)).
 - Auto-completion ([nvim-cmp](https://github.com/hrsh7th/nvim-cmp)) and code snippets ([luasnip](https://github.com/L3MON4D3/LuaSnip)).
-- Fuzzy find, live grep ([telescope](https://github.com/nvim-telescope/telescope.nvim)) and jump between files ([harpoon](https://github.com/ThePrimeagen/harpoon)).
+- Fuzzy find, live grep ([telescope](https://github.com/nvim-telescope/telescope.nvim)).
+- Improved navigation ([harpoon](https://github.com/ThePrimeagen/harpoon) + [leap](https://github.com/ggandor/leap.nvim)).
 - Debugging ([nvim-dap](https://github.com/mfussenegger/nvim-dap) + [nvim-dap-go](https://github.com/leoluz/nvim-dap-go)).
 
 ## Usage

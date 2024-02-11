@@ -132,8 +132,7 @@ local function mason_lsp_handlers()
                 settings = {
                     yaml = {
                         schemas = {
-                            ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.0/all.json"] =
-                            "k8s/**",
+                            ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.0/all.json"] = "k8s/**",
                             ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = {
                                 "ci/*.yml",
                                 ".gitlab-ci.yml",
@@ -173,27 +172,27 @@ local function mason_lsp_config(_, opts)
     vim.api.nvim_create_augroup("UserLspConfig", {})
 
     -- autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
-    vim.api.nvim_create_autocmd({ "CursorHold"}, {
+    vim.api.nvim_create_autocmd({ "CursorHold" }, {
         group = "UserLspConfig",
         callback = function()
             vim.o.updatetime = 2000
             vim.lsp.buf.document_highlight()
-        end
+        end,
     })
     -- autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
-    vim.api.nvim_create_autocmd({ "CursorHoldI"}, {
+    vim.api.nvim_create_autocmd({ "CursorHoldI" }, {
         group = "UserLspConfig",
         callback = function()
             vim.o.updatetime = 2000
             vim.lsp.buf.document_highlight()
-        end
+        end,
     })
     -- autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-    vim.api.nvim_create_autocmd({ "CursorMoved"}, {
+    vim.api.nvim_create_autocmd({ "CursorMoved" }, {
         group = "UserLspConfig",
         callback = function()
             vim.lsp.buf.clear_references()
-        end
+        end,
     })
 
     -- Use LspAttach autocommand to only map the following keys
