@@ -2,13 +2,13 @@ local function noice_options()
     local options = {
         routes = {
             filter = {
-                event = 'msg_show',
+                event = "msg_show",
                 any = {
-                    { find = '%d+L, %d+B' },
-                    { find = '; after #%d+' },
-                    { find = '; before #%d+' },
-                    { find = '%d fewer lines' },
-                    { find = '%d more lines' },
+                    { find = "%d+L, %d+B" },
+                    { find = "; after #%d+" },
+                    { find = "; before #%d+" },
+                    { find = "%d fewer lines" },
+                    { find = "%d more lines" },
                 },
             },
             opts = { skip = true },
@@ -84,5 +84,5 @@ return {
     dependencies = {
         -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
         "MunifTanjim/nui.nvim",
-    }
+    },
 }
