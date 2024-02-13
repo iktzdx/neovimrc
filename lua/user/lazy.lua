@@ -22,6 +22,7 @@ require("lazy").setup({
     { import = "user.plugins.dap" },
     { import = "user.plugins.golang" },
     { import = "user.plugins.utils" },
+    { import = "user.plugins.test" },
 }, {
     install = {
         colorscheme = { "onedark" },
