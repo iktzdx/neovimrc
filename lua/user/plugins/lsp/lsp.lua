@@ -2,8 +2,8 @@ local function mason_lsp_options()
     local options = {
         ensure_installed = {
             "bashls",
-            "gopls",
             "golangci_lint_ls",
+            "gopls",
             "intelephense",
             "lua_ls",
             "tsserver",
@@ -20,16 +20,12 @@ local function mason_lsp_handlers()
     capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
     local handlers = {
-        -- default handler (optional)
         function(server_name)
             lspconfig[server_name].setup({
                 capabilities = capabilities,
             })
         end,
 
-        -- Next, you can provide targeted overrides for specific servers.
-
-        -- [[
         -- Lua Setup
         ["lua_ls"] = function()
             lspconfig.lua_ls.setup({
@@ -59,9 +55,7 @@ local function mason_lsp_handlers()
                 },
             })
         end,
-        -- ]]
 
-        -- [[
         -- Golang Setup
         ["gopls"] = function()
             lspconfig.gopls.setup({
@@ -79,9 +73,7 @@ local function mason_lsp_handlers()
                 },
             })
         end,
-        -- ]]
 
-        -- [[
         -- golangci-lint
         ["golangci_lint_ls"] = function()
             lspconfig.golangci_lint_ls.setup({
@@ -107,9 +99,7 @@ local function mason_lsp_handlers()
                 },
             })
         end,
-        -- ]]
 
-        -- [[
         -- PHP Setup
         ["intelephense"] = function()
             lspconfig.intelephense.setup({
@@ -121,9 +111,7 @@ local function mason_lsp_handlers()
                 },
             })
         end,
-        -- ]]
 
-        -- [[
         -- YAML Setup
         ["yamlls"] = function()
             lspconfig.yamlls.setup({
@@ -132,8 +120,7 @@ local function mason_lsp_handlers()
                 settings = {
                     yaml = {
                         schemas = {
-                            ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.0/all.json"] =
-                            "k8s/**",
+                            ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.0/all.json"] = "k8s/**",
                             ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = {
                                 "ci/*.yml",
                                 ".gitlab-ci.yml",
@@ -151,7 +138,6 @@ local function mason_lsp_handlers()
                 },
             })
         end,
-        -- ]]
     }
 
     return handlers
@@ -169,6 +155,30 @@ local function mason_lsp_config(_, opts)
     require("mason").setup()
     require("mason-lspconfig").setup(opts)
     require("mason-lspconfig").setup_handlers(mason_lsp_handlers())
+
+    require("mason-tool-installer").setup({
+        ensure_installed = {
+            -- Go tools
+            { "golangci-lint", version = "v1.56.1" },
+            "gofumpt",
+            "goimports",
+            "golines",
+            "gomodifytags",
+            "gopls",
+            "gotests",
+            "impl",
+            "json-to-struct",
+            "staticcheck",
+
+            "codespell",
+            "prettier",
+            "stylua",
+        },
+        auto_update = false,
+        run_on_start = true,
+        start_delay = 3000,
+        debounce_hours = 1,
+    })
 
     vim.api.nvim_create_augroup("UserLspConfig", {})
 
@@ -224,10 +234,10 @@ local function mason_lsp_config(_, opts)
             vim.keymap.set("n", "<leader>vd", function()
                 vim.diagnostic.open_float()
             end, params)
-            vim.keymap.set("n", "[d", function()
+            vim.keymap.set({ "n", "v" }, "]d", function()
                 vim.diagnostic.goto_next()
             end, params)
-            vim.keymap.set("n", "]d", function()
+            vim.keymap.set({ "n", "v" }, "[d", function()
                 vim.diagnostic.goto_prev()
             end, params)
         end,
@@ -252,6 +262,7 @@ return {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "j-hui/fidget.nvim",
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
     opts = mason_lsp_options,
     config = mason_lsp_config,
