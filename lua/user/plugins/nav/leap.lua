@@ -43,7 +43,8 @@ end
 
 return {
     "ggandor/leap.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    lazy = false,
+    event = { "BufRead" },
     dependencies = {
         "tpope/vim-repeat",
     },
