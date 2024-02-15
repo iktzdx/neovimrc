@@ -4,6 +4,7 @@ local function mason_lsp_options()
             "bashls",
             "golangci_lint_ls",
             "gopls",
+            "jsonls",
             "intelephense",
             "lua_ls",
             "tsserver",
@@ -103,6 +104,20 @@ local function mason_lsp_handlers()
             })
         end,
 
+        -- JSON Setup
+        ["jsonls"] = function()
+            lspconfig.jsonls.setup({
+                capabilities = capabilities,
+
+                settings = {
+                    json = {
+                        schemas = require("schemastore").json.schemas(),
+                        validate = { enable = true },
+                    },
+                },
+            })
+        end,
+
         -- YAML Setup
         ["yamlls"] = function()
             lspconfig.yamlls.setup({
@@ -110,13 +125,11 @@ local function mason_lsp_handlers()
 
                 settings = {
                     yaml = {
-                        schemas = {
-                            ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.0/all.json"] = "k8s/**",
-                            ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = {
-                                "ci/*.yml",
-                                ".gitlab-ci.yml",
-                            },
+                        schemaStore = {
+                            enable = false,
+                            url = "",
                         },
+                        schemas = require("schemastore").yaml.schemas(),
                         customTags = {
                             "!reference sequence",
                         },
@@ -162,11 +175,17 @@ local function mason_lsp_config(_, opts)
             "staticcheck",
 
             -- Lua
-            "luacheck", -- linter
-            "stylua", -- formatter
+            "luacheck",
+            "stylua",
 
+            -- JSON
+            "jsonlint",
+            "fixjson",
+
+            -- Other
             "codespell",
             "prettier",
+            "yamllint",
         },
         auto_update = false,
         run_on_start = true,
@@ -257,6 +276,7 @@ return {
         "williamboman/mason-lspconfig.nvim",
         "j-hui/fidget.nvim",
         "WhoIsSethDaniel/mason-tool-installer.nvim",
+        "b0o/schemastore.nvim",
     },
     opts = mason_lsp_options,
     config = mason_lsp_config,

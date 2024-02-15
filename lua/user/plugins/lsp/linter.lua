@@ -4,6 +4,8 @@ local function lint_config()
     nvim_lint.linters_by_ft = {
         go = { "golangcilint" },
         lua = { "luacheck" },
+        json = { "jsonlint" },
+        yaml = { "yamllint" },
     }
 
     local golangcilint = require("lint.linters.golangcilint")

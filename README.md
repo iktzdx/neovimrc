@@ -16,7 +16,7 @@ Installing Neovim from the [source code](https://github.com/neovim/neovim/wiki/#
 Make sure to remove or backup your current `~/.config/nvim` directory.
 
 ```
-git clone --depth 1 --branch v2.6.0 git@github.com:iktzdx/nvim.git ~/.config/nvim
+git clone --depth 1 --branch v2.6.1 git@github.com:iktzdx/nvim.git ~/.config/nvim
 ```
 
 ### Plugins

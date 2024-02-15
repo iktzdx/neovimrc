@@ -23,10 +23,18 @@ vim.api.nvim_create_autocmd("TermOpen", {
     end,
 })
 
+-- Use JSONToStruct command only for Go files
 vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
     pattern = "*.go",
     group = user_group,
     callback = function()
         require("user.local.jsontostruct")
     end,
+})
+
+-- Set indentation to 2 spaces for JSON files
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "json",
+    group = user_group,
+    command = "setlocal ts=2 sw=2 expandtab",
 })

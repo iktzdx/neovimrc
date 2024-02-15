@@ -3,7 +3,7 @@ local function conform_options()
         formatters_by_ft = {
             lua = { "stylua" },
             go = { { "gofumpt", "gofmt" }, "goimports", "golines" },
-            json = { "prettier" },
+            json = { "fixjson" },
             yaml = { "prettier" },
             markdown = { "prettier" },
             ["*"] = { "codespell" },
