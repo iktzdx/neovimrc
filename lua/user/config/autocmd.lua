@@ -1,7 +1,11 @@
+local user_group = vim.api.nvim_create_augroup("UserGroup", {
+    clear = false,
+})
 -- Save cursor last position
 -- from :help last-position-jump
 vim.api.nvim_create_autocmd("BufRead", {
     pattern = "*",
+    group = user_group,
     callback = function()
         vim.cmd([[
       autocmd FileType <buffer> ++once
@@ -13,7 +17,16 @@ vim.api.nvim_create_autocmd("BufRead", {
 -- Disable line numbers for terminal buftype
 vim.api.nvim_create_autocmd("TermOpen", {
     pattern = "*",
+    group = user_group,
     callback = function()
         vim.cmd([[ setlocal nonumber norelativenumber ]])
+    end,
+})
+
+vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
+    pattern = "*.go",
+    group = user_group,
+    callback = function()
+        require("user.local.jsontostruct")
     end,
 })
