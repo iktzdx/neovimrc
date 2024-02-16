@@ -193,37 +193,9 @@ local function mason_lsp_config(_, opts)
         debounce_hours = 1,
     })
 
-    vim.api.nvim_create_augroup("UserLspConfig", {})
-
-    -- autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
-    vim.api.nvim_create_autocmd({ "CursorHold" }, {
-        group = "UserLspConfig",
-        pattern = { "*.go" },
-        callback = function()
-            vim.o.updatetime = 2000
-            vim.lsp.buf.document_highlight()
-        end,
-    })
-    -- autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
-    vim.api.nvim_create_autocmd({ "CursorHoldI" }, {
-        group = "UserLspConfig",
-        pattern = { "*.go" },
-        callback = function()
-            vim.o.updatetime = 2000
-            vim.lsp.buf.document_highlight()
-        end,
-    })
-    -- autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-    vim.api.nvim_create_autocmd({ "CursorMoved" }, {
-        group = "UserLspConfig",
-        pattern = { "*.go" },
-        callback = function()
-            vim.lsp.buf.clear_references()
-        end,
-    })
-
     -- Use LspAttach autocommand to only map the following keys
     -- after the language server attaches to the current buffer
+    vim.api.nvim_create_augroup("UserLspConfig", {})
     vim.api.nvim_create_autocmd("LspAttach", {
         group = "UserLspConfig",
         callback = function(ev)
