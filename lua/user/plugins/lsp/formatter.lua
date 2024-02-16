@@ -24,6 +24,11 @@ local function conform_config(_, opts)
 
     conform.setup(opts)
 
+    -- 140 is the preferred line length for go code
+    conform.formatters.golines = {
+        prepend_args = { "-m", "140" },
+    }
+
     vim.api.nvim_create_autocmd("BufWritePre", {
         pattern = "*",
         callback = function(args)
