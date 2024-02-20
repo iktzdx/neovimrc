@@ -66,7 +66,6 @@ vim.keymap.set("v", ">", ">gv")
 -- Move text up and down
 vim.keymap.set("v", "<A-j>", ":m .+1<CR>==")
 vim.keymap.set("v", "<A-k>", ":m .-2<CR>==")
-vim.keymap.set("v", "p", '"_dP') -- change default yank/paste behavior
 
 -- Visual Block --
 -- Move text up and down
@@ -74,3 +73,9 @@ vim.keymap.set("x", "<S-j>", ":move '>+1<CR>gv-gv")
 vim.keymap.set("x", "<S-k>", ":move '<-2<CR>gv-gv")
 vim.keymap.set("x", "<A-j>", ":move '>+1<CR>gv-gv")
 vim.keymap.set("x", "<A-k>", ":move '<-2<CR>gv-gv")
+
+-- change default yank/paste behavior
+vim.keymap.set("x", "p", '"_dP')
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+vim.keymap.set("n", "<leader>Y", [["+Y]])
