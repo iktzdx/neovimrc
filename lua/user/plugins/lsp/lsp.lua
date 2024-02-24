@@ -70,6 +70,7 @@ local function mason_lsp_handlers()
                             fillstruct = true,
                         },
                         staticcheck = true,
+                        buildFlags = { "-tags=integration,mock,e2e" },
                     },
                 },
             })
