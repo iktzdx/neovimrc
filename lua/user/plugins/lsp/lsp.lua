@@ -61,6 +61,16 @@ local function mason_lsp_handlers()
         ["gopls"] = function()
             lspconfig.gopls.setup({
                 capabilities = capabilities,
+
+                cmd = { "gopls" },
+                filetypes = { "go", "gomod", "gowork", "gotmpl" },
+                root_dir = lspconfig.util.root_pattern(
+                    "go.work",
+                    "go.mod",
+                    ".git"
+                ),
+                single_file_support = true,
+
                 settings = {
                     gopls = {
                         completeUnimported = true,
@@ -69,7 +79,6 @@ local function mason_lsp_handlers()
                         analyses = {
                             unusedparams = true,
                             fillstruct = true,
-                            fieldalignment = true,
                             shadow = true,
                         },
                         staticcheck = true,
@@ -170,6 +179,7 @@ local function mason_lsp_config(_, opts)
         ensure_installed = {
             -- Go tools
             { "golangci-lint", version = "v1.56.1" },
+            "gci",
             "gofumpt",
             "goimports",
             "golines",

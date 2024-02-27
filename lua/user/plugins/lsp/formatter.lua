@@ -2,7 +2,7 @@ local function conform_options()
     local options = {
         formatters_by_ft = {
             lua = { "stylua" },
-            go = { { "gofumpt", "gofmt" }, "goimports", "golines" },
+            go = { "gci", "golines", { "gofumpt", "gofmt" } },
             json = { "fixjson" },
             yaml = { "prettier" },
             markdown = { "prettier" },
@@ -29,12 +29,30 @@ local function conform_config(_, opts)
         prepend_args = { "-m", "140" },
     }
 
-    vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = "*",
-        callback = function(args)
-            require("conform").format({ bufnr = args.buf })
-        end,
-    })
+    conform.formatters.gci = {
+        inherit = false,
+        command = "gci",
+        args = {
+            "write",
+            "--skip-generated",
+            "--skip-vendor",
+            "--custom-order",
+            "-s",
+            "standard",
+            "-s",
+            "default",
+            -- "-s",
+            -- "blank",
+            -- "-s",
+            -- "dot",
+            -- "-s",
+            -- "alias",
+            "-s",
+            "localmodule",
+            "$FILENAME",
+        },
+        stdin = false,
+    }
 
     vim.keymap.set({ "n", "v" }, "<leader>fm", function()
         conform.format({ lsp_fallback = true, timeout_ms = 200 })

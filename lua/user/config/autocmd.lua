@@ -1,5 +1,5 @@
 local user_group = vim.api.nvim_create_augroup("UserGroup", {
-    clear = false,
+    clear = true,
 })
 -- Save cursor last position
 -- from :help last-position-jump
