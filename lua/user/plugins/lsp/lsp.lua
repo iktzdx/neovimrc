@@ -64,13 +64,18 @@ local function mason_lsp_handlers()
                 settings = {
                     gopls = {
                         completeUnimported = true,
+                        completeFunctionCalls = true,
                         usePlaceholders = true,
                         analyses = {
                             unusedparams = true,
                             fillstruct = true,
+                            fieldalignment = true,
+                            shadow = true,
                         },
                         staticcheck = true,
                         buildFlags = { "-tags=integration,mock,e2e" },
+                        gofumpt = true,
+                        diagnosticsDelay = "250ms",
                     },
                 },
             })
