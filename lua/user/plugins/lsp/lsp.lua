@@ -201,6 +201,7 @@ local function mason_lsp_config(_, opts)
             -- Other
             "codespell",
             "prettier",
+            "shellcheck",
             "yamllint",
         },
         auto_update = false,

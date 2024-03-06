@@ -5,6 +5,7 @@ local function lint_config()
         go = { "golangcilint" },
         lua = { "luacheck" },
         json = { "jsonlint" },
+        sh = { "shellcheck" },
         yaml = { "yamllint" },
     }
 
