@@ -29,12 +29,6 @@ local function cmp_options()
         completion = {
             completeopt = "menu,menuone,preview,noselect",
         },
-        view = {
-            entries = {
-                name = "custom",
-                selection_order = "near_cursor",
-            },
-        },
         mapping = cmp.mapping.preset.insert({
             ["<C-u>"] = cmp.mapping.scroll_docs(-4), -- Up
             ["<C-d>"] = cmp.mapping.scroll_docs(4), -- Down
@@ -43,9 +37,7 @@ local function cmp_options()
             ["<C-y>"] = cmp.mapping.confirm({ cmp_replace, select = true }),
             ["<C-Space>"] = cmp.mapping.complete(),
             ["<Tab>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.select_next_item()
-                elseif luasnip.expand_or_locally_jumpable() then
+                if luasnip.expand_or_locally_jumpable() then
                     luasnip.expand_or_jump()
                 elseif has_words_before() then
                     cmp.complete()
@@ -54,9 +46,7 @@ local function cmp_options()
                 end
             end, { "i", "s" }),
             ["<S-Tab>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.select_prev_item()
-                elseif luasnip.jumpable(-1) then
+                if luasnip.jumpable(-1) then
                     luasnip.jump(-1)
                 else
                     fallback()
