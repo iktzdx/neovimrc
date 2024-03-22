@@ -14,6 +14,7 @@ local function telescope_options()
                 "--column",
                 "--smart-case",
             },
+            file_ignore_patterns = { "^.git/", "^vendor/" },
             prompt_prefix = "   ",
             selection_caret = "  ",
             entry_prefix = "  ",
@@ -91,7 +92,6 @@ local function telescope_config(_, opts)
     local builtin = require("telescope.builtin")
 
     local file_pickers_defaults = {
-        file_ignore_patterns = { "^.git/" },
         follow = true,
         hidden = true,
         no_ignore = true,
