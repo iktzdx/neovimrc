@@ -114,6 +114,7 @@ return {
     "mfussenegger/nvim-dap",
     dependencies = {
         "theHamsta/nvim-dap-virtual-text",
+        "nvim-neotest/nvim-nio",
         {
             "rcarriga/nvim-dap-ui",
             config = dapui_config,
