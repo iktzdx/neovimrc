@@ -1,20 +1,3 @@
-local function mason_lsp_options()
-    local options = {
-        ensure_installed = {
-            "bashls",
-            "golangci_lint_ls",
-            "gopls",
-            "jsonls",
-            "intelephense",
-            "lua_ls",
-            "tsserver",
-            "yamlls",
-        },
-    }
-
-    return options
-end
-
 local function mason_lsp_handlers()
     local lspconfig = require("lspconfig")
     local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -177,32 +160,42 @@ local function mason_lsp_config(_, opts)
 
     require("mason-tool-installer").setup({
         ensure_installed = {
-            -- Go tools
-            { "golangci-lint", version = "v1.56.1" },
+            -- LSP
+            "bashls",
+            "golangci_lint_ls",
+            "gopls",
+            "jsonls",
+            "intelephense",
+            "lua_ls",
+            "tsserver",
+            "yamlls",
+
+            -- Linters
+            { "golangci-lint", version = "v1.56.2" },
+            "staticcheck",
+            "luacheck",
+            "jsonlint",
+            "fixjson",
+            "yamllint",
+            "shellcheck",
+            "codespell",
+
+            -- Formatters
             "gci",
             "gofumpt",
             "goimports",
             "golines",
+            "stylua",
+            "prettier",
+
+            -- Debggers
+            "delve",
+
+            -- Other tools
             "gomodifytags",
-            "gopls",
             "gotests",
             "impl",
             "json-to-struct",
-            "staticcheck",
-
-            -- Lua
-            "luacheck",
-            "stylua",
-
-            -- JSON
-            "jsonlint",
-            "fixjson",
-
-            -- Other
-            "codespell",
-            "prettier",
-            "shellcheck",
-            "yamllint",
         },
         auto_update = false,
         run_on_start = true,
@@ -267,6 +260,6 @@ return {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
         "b0o/schemastore.nvim",
     },
-    opts = mason_lsp_options,
+    opts = {},
     config = mason_lsp_config,
 }
