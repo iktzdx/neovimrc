@@ -6,6 +6,7 @@ local function conform_options()
             json = { "fixjson" },
             yaml = { "prettier" },
             markdown = { "prettier" },
+            c = { "clang-format" },
             ["*"] = { "codespell" },
         },
         format_on_save = {

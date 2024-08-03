@@ -2,6 +2,7 @@ local function ts_options()
     local options = {
         ensure_installed = {
             "bash",
+            "c",
             "dockerfile",
             "gitcommit",
             "go",

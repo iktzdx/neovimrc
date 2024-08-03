@@ -90,6 +90,25 @@ local function mason_lsp_handlers()
             })
         end,
 
+        -- Clang Setup
+        ["clangd"] = function()
+            lspconfig.clangd.setup({
+                capabilities = capabilities,
+                cmd = { "clangd" },
+                filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+                root_dir = lspconfig.util.root_pattern(
+                    ".clangd",
+                    ".clang-tidy",
+                    ".clang-format",
+                    "compile_commands.json",
+                    "compile_flags.txt",
+                    "configure.ac",
+                    ".git"
+                ),
+                single_file_support = true,
+            })
+        end,
+
         -- PHP Setup
         ["intelephense"] = function()
             lspconfig.intelephense.setup({
@@ -187,6 +206,7 @@ local function mason_lsp_config(_, opts)
             "golines",
             "stylua",
             "prettier",
+            "clang-format",
 
             -- Debggers
             "delve",
