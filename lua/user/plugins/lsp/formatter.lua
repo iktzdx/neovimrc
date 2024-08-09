@@ -11,7 +11,7 @@ local function conform_options()
         },
         format_on_save = {
             lsp_fallback = true,
-            timeout_ms = 200,
+            timeout_ms = 500,
         },
         log_level = vim.log.levels.ERROR,
         notify_on_error = true,
