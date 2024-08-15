@@ -28,7 +28,10 @@ local function conform_config(_, opts)
     -- 140 is the preferred line length for go code
     conform.formatters = {
         ["clang-format"] = {
-            prepend_args = { "--style=LLVM", "--fallback-style=Microsoft" },
+            prepend_args = {
+                "--style=file",
+                "--fallback-style=LLVM",
+            },
         },
     }
 
