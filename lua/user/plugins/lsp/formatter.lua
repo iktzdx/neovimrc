@@ -2,17 +2,20 @@ local function conform_options()
     local options = {
         formatters_by_ft = {
             lua = { "stylua" },
-            go = { "gci", "golines", { "gofumpt", "gofmt" } },
+            go = { "gci", "golines", "gofumpt", "gofmt", stop_after_first = true },
             json = { "fixjson" },
             yaml = { "prettier" },
             markdown = { "prettier" },
             c = { "clang-format" },
             ["*"] = { "codespell" },
         },
-        format_on_save = {
-            lsp_fallback = true,
-            timeout_ms = 500,
-        },
+        format_on_save = function(bufnr)
+            -- Disable with a global or buffer-local variable
+            if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+                return
+            end
+            return { timeout_ms = 500, lsp_format = "fallback" }
+        end,
         log_level = vim.log.levels.ERROR,
         notify_on_error = true,
     }
@@ -28,10 +31,7 @@ local function conform_config(_, opts)
     -- 140 is the preferred line length for go code
     conform.formatters = {
         ["clang-format"] = {
-            prepend_args = {
-                "--style=file",
-                "--fallback-style=LLVM",
-            },
+            prepend_args = { "--fallback-style=LLVM" },
         },
     }
 
