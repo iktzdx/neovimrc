@@ -2,7 +2,7 @@ local function conform_options()
     local options = {
         formatters_by_ft = {
             lua = { "stylua" },
-            go = { "gci", "golines", "gofumpt", "gofmt", stop_after_first = true },
+            go = { "gci", "golines", "gofumpt", stop_after_first = false },
             json = { "fixjson" },
             yaml = { "prettier" },
             markdown = { "prettier" },
