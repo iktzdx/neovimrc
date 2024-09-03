@@ -190,7 +190,7 @@ local function mason_lsp_config(_, opts)
             "yamlls",
 
             -- Linters
-            { "golangci-lint", version = "v1.59.1" },
+            "golangci-lint",
             "staticcheck",
             "luacheck",
             "jsonlint",
