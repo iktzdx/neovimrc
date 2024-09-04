@@ -181,6 +181,7 @@ local function mason_lsp_config(_, opts)
         ensure_installed = {
             -- LSP
             "bashls",
+            "clangd",
             "golangci_lint_ls",
             "gopls",
             "jsonls",
