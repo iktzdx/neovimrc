@@ -187,7 +187,7 @@ local function mason_lsp_config(_, opts)
             "jsonls",
             "intelephense",
             "lua_ls",
-            "tsserver",
+            "ts_ls",
             "yamlls",
 
             -- Linters
